@@ -14,7 +14,7 @@ class CreateTransaksiTable extends Migration
     {
         Schema::create('transaksi', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_barang')->unsigned();
+            $table->integer('id_alat')->unsigned();
             $table->integer('id_pengguna')->unsigned();
             $table->timestamp('dipinjam');
             $table->timestamp('dikembalikan');
@@ -22,7 +22,7 @@ class CreateTransaksiTable extends Migration
             //$table->timestamps();
 
             // Foreign key
-            $table->foreign('id_barang')->references('id')->on('barang')->onDelete('cascade');
+            $table->foreign('id_alat')->references('id')->on('alat')->onDelete('cascade');
             $table->foreign('id_pengguna')->references('id')->on('peminjam')->onDelete('cascade');
         });
     }

@@ -14,7 +14,7 @@ class CreateBookingTable extends Migration
     {
         Schema::create('booking', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_barang')->unsigned();
+            $table->integer('id_alat')->unsigned();
             $table->integer('id_pengguna')->unsigned();
             $table->timestamp('mulai');
             $table->timestamp('selesai');
@@ -22,7 +22,7 @@ class CreateBookingTable extends Migration
             //$table->timestamps();
 
             // Foreign key
-            $table->foreign('id_barang')->references('id')->on('barang');
+            $table->foreign('id_alat')->references('id')->on('alat');
             $table->foreign('id_pengguna')->references('id')->on('peminjam');
         });
     }

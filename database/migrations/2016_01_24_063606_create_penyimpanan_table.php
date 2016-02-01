@@ -14,12 +14,12 @@ class CreatePenyimpananTable extends Migration
     {
         Schema::create('penyimpanan', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_barang')->unsigned();
+            $table->integer('id_alat')->unsigned();
             $table->integer('id_lokasi')->unsigned();
             //$table->timestamps();
 
             // Foreign key
-            $table->foreign('id_barang')->references('id')->on('barang');
+            $table->foreign('id_alat')->references('id')->on('alat');
             $table->foreign('id_lokasi')->references('id')->on('lokasi');
         });
     }

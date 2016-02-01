@@ -14,14 +14,14 @@ class CreatePemeliharaanTable extends Migration
     {
         Schema::create('pemeliharaan', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_barang')->unsigned();
+            $table->integer('id_alat')->unsigned();
             $table->timestamp('mulai');
             $table->timestamp('selesai');
             $table->integer('status');
             //$table->timestamps();
 
             // Foreign key
-            $table->foreign('id_barang')->references('id')->on('barang');
+            $table->foreign('id_alat')->references('id')->on('alat');
         });
     }
 
