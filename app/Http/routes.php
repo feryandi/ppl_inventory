@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -27,5 +23,16 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
+	Route::get('/', 'AlatController@index');
+
+	Route::get('/add', 'AlatController@addForm');
+
+	Route::get('/lokasi', function () {
+	    return view('lokasi');
+	});
+	Route::post('/lokasi/add', 'LokasiController@add');
+
+	Route::post('/task', 'AlatController@add');
+
 });
