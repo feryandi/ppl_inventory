@@ -22,27 +22,34 @@ class AlatController extends Controller
     {
         $input = Request::all();
 
-/*        $rules = array( 'name' => 'required', 
-                'username' => 'required|min:6|unique:users', 
-                'password' => 'required|min:6|confirmed',
-                'email' => 'required|email|unique:users' );
-        $messages = array('email.unique' => 'An account already exists with this email');
+        $rules = array( 'lokasi' => 'required|exists:lokasi,id',
+                        'nama' => 'required',
+                        'kode' => 'required' );
         $validator = Validator::make (
             $input,
-            $rules,
-            $messages
-        );*/
+            $rules
+        );
 
-        $alat = new Alat;
-        $alat->fill($input);
-        $alat->save();
+        if($validator->fails()) {
 
-        $penyimpanan = new Penyimpanan;
-        $penyimpanan->id_alat = $alat->id;
-        $penyimpanan->id_lokasi = $input['lokasi'];
-        $penyimpanan->save();
+            //return $this->failed(array('message' => $validator->messages()));
+            echo "Validation";
+            return view('welcome');
 
+        } else {
 
-        return view('welcome');
+            $alat = new Alat;
+            $alat->fill($input);
+            $alat->save();
+
+            $penyimpanan = new Penyimpanan;
+            $penyimpanan->id_alat = $alat->id;
+            $penyimpanan->id_lokasi = $input['lokasi'];
+            $penyimpanan->save();
+
+            //return $this->success();
+            return view('welcome');
+
+        }
     }
 }

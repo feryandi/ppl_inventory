@@ -34,5 +34,10 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/lokasi/add', 'LokasiController@add');
 
 	Route::post('/task', 'AlatController@add');
+	Route::post('/task2', 'TransaksiController@add');
+	Route::post('/task3', 'TransaksiController@del');
+	Route::get('/transaksi', function () {
+	    return view('transaksi');
+	});
 
 });

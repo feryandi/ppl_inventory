@@ -16,8 +16,8 @@ class CreateTransaksiTable extends Migration
             $table->increments('id');
             $table->integer('id_alat')->unsigned();
             $table->integer('id_pengguna')->unsigned();
-            $table->timestamp('dipinjam');
-            $table->timestamp('dikembalikan');
+            $table->timestamp('dipinjam')->default('0000-00-00 00:00:00');
+            $table->timestamp('dikembalikan')->default('0000-00-00 00:00:00');
             $table->text('keterangan');
             //$table->timestamps();
 

@@ -15,8 +15,8 @@ class CreatePemeliharaanTable extends Migration
         Schema::create('pemeliharaan', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_alat')->unsigned();
-            $table->timestamp('mulai');
-            $table->timestamp('selesai');
+            $table->timestamp('mulai')->default('0000-00-00 00:00:00');
+            $table->timestamp('selesai')->default('0000-00-00 00:00:00');
             $table->integer('status');
             //$table->timestamps();
 

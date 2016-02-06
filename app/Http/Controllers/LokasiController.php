@@ -13,19 +13,26 @@ class LokasiController extends Controller
     {
         $input = Request::all();
 
-/*        $rules = array( 'name' => 'required', 
-                'username' => 'required|min:6|unique:users', 
-                'password' => 'required|min:6|confirmed',
-                'email' => 'required|email|unique:users' );
-        $messages = array('email.unique' => 'An account already exists with this email');
+        $rules = array( 'nama' => 'required|unique:lokasi,nama' );
         $validator = Validator::make (
             $input,
-            $rules,
-            $messages
-        );*/
+            $rules
+        );
 
-        $lokasi = new Lokasi;
-        $lokasi->fill($input);
-        $lokasi->save();
+        if($validator->fails()) {
+
+            //return $this->failed(array('message' => $validator->messages()));
+            echo "Validation";
+            return view('welcome');
+
+        } else {
+
+            $lokasi = new Lokasi;
+            $lokasi->fill($input);
+            $lokasi->save();
+
+            //return $this->success();
+            return view('welcome');
+        }
     }
 }
