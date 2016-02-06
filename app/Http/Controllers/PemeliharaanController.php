@@ -8,21 +8,20 @@ use App\Penyimpanan;
 use App\Peminjam;
 use App\Transaksi;
 use App\Booking;
+use App\Pemeliharaan;
 use Request;
 use Validator;
 use App\Http\Controllers\Controller;
 
 date_default_timezone_set('Asia/Jakarta');
 
-class TransaksiController extends Controller
+class PemeliharaanController extends Controller
 {
     public function add()
     {
         $input = Request::all();
-        $peminjam = Peminjam::select('id')->where('nim/nip', $input['nipnim'])->first();
 
-        $rules = array( 'alat' => 'required|exists:alat,id', 
-                        'nipnim' => 'required|exists:peminjam,nim/nip');
+        $rules = array( 'alat' => 'required|exists:alat,id' );
         $validator = Validator::make (
             $input,
             $rules
@@ -44,17 +43,21 @@ class TransaksiController extends Controller
 
             /* Cek apakah barang sudah dibooking oleh orang lain, kalo dibooking orang tersebut, boleh */
             $check += Booking::where('id_alat', $input['alat'])
-                                ->where('id_pengguna', '<>', $peminjam->id)
                                 ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
                                 ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
                                 ->count();
 
+            /* Cek apakah barang sedang dipelihara */
+            $check += Pemeliharaan::where('id_alat', $input['alat'])
+                                ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                ->where('selesai', '0000-00-00 00:00:00')
+                                ->count();
+
             if ($check == 0) {
-                $transaksi = new Transaksi;
-                $transaksi->id_alat = $input['alat'];
-                $transaksi->id_pengguna = $peminjam->id;
-                $transaksi->dipinjam = date('Y-m-d H:i:s', time());
-                $transaksi->save();
+                $pemeliharaan = new Pemeliharaan;
+                $pemeliharaan->id_alat = $input['alat'];
+                $pemeliharaan->mulai = date('Y-m-d H:i:s', time());
+                $pemeliharaan->save();
 
                 //return $this->success();
                 return view('welcome');
@@ -62,7 +65,7 @@ class TransaksiController extends Controller
             } else {
 
                 //return $this->failed(array('message' => "Barang belum dikembalikan"));
-                echo "Barang belum dikembalikan";
+                echo "Barang tidak tersedia";
                 return view('welcome');
 
             }
@@ -72,7 +75,7 @@ class TransaksiController extends Controller
 
     public function del()
     {
-        $input = Request::all();
+/*        $input = Request::all();
 
         $rules = array( 'alat' => 'required|exists:alat,id' );
         $validator = Validator::make (
@@ -94,6 +97,6 @@ class TransaksiController extends Controller
 
             return view('welcome');
 
-        }
+        }*/
     }
 }

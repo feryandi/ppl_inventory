@@ -112,6 +112,7 @@ class BookingController extends Controller
 
     public function del()
     {
+        /* Belom kepikiran mau kaya gimana prosedur delete bookingnya */
 /*        $input = Request::all();
 
         $rules = array( 'alat' => 'required|exists:alat,id' );

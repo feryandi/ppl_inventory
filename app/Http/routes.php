@@ -24,7 +24,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-	Route::get('/', 'AlatController@index');
+	Route::get('/', 'AlatController@getAvailable');
 
 	Route::get('/add', 'AlatController@addForm');
 
@@ -45,5 +45,10 @@ Route::group(['middleware' => ['web']], function () {
 	    return view('booking');
 	});
 	Route::post('/booking/add', 'BookingController@add');
+
+	Route::get('/pemeliharaan', function () {
+	    return view('pemeliharaan');
+	});
+	Route::post('/pemeliharaan/add', 'PemeliharaanController@add');
 
 });
