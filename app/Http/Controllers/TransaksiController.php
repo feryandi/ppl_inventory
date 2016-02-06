@@ -7,6 +7,7 @@ use App\Lokasi;
 use App\Penyimpanan;
 use App\Peminjam;
 use App\Transaksi;
+use App\Booking;
 use Request;
 use Validator;
 use App\Http\Controllers\Controller;

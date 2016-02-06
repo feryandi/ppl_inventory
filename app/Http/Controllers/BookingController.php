@@ -7,6 +7,7 @@ use App\Lokasi;
 use App\Penyimpanan;
 use App\Peminjam;
 use App\Transaksi;
+use App\Booking;
 use Request;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -49,8 +50,8 @@ class BookingController extends Controller
             return view('welcome');
 
         } else {
-            $booking_mulai = date('Y-m-d H:i:s', mktime(0, $input['mulai_i'], $input['mulai_h'], $input['mulai_d'], $input['mulai_m'], $input['mulai_y']));
-            $booking_selesai = date('Y-m-d H:i:s', mktime(0, $input['selesai_i'], $input['selesai_h'], $input['selesai_d'], $input['selesai_m'], $input['selesai_y']));
+            $booking_mulai = date('Y-m-d H:i:s', mktime($input['mulai_h'], $input['mulai_i'], 0, $input['mulai_m'], $input['mulai_d'], $input['mulai_y']));
+            $booking_selesai = date('Y-m-d H:i:s', mktime($input['selesai_h'], $input['selesai_i'], 0, $input['selesai_m'], $input['selesai_d'], $input['selesai_y']));
 
             $check = 0;
 
@@ -61,26 +62,26 @@ class BookingController extends Controller
                                 
             /* Cek apakah barang sudah dibooking oleh orang lain */
             $check += Booking::where('id_alat', $input['alat'])
-                                ->where(function($query)
-                                {
-                                    $query->where('mulai', '<=', $booking_mulai)
-                                          ->where('mulai', '>=', $booking_selesai)
-                                          ->where('selesai', '<=', $booking_selesai);
-                                })
-                                ->orwhere(function($query)
-                                {
-                                    $query->where('mulai', '<=', $booking_mulai)
-                                          ->where('selesai', '>', $booking_mulai);
-                                          ->where('mulai', '<', $booking_selesai);
-                                          ->where('selesai', '>=', $booking_selesai);
-                                })
-                                ->orwhere(function($query)
+                                ->where(function($query) use ($booking_mulai, $booking_selesai)
                                 {
                                     $query->where('mulai', '>=', $booking_mulai)
-                                          ->where('selesai', '<=', $booking_mulai)
+                                          ->where('mulai', '<=', $booking_selesai)
                                           ->where('selesai', '>=', $booking_selesai);
                                 })
-                                ->orwhere(function($query)
+                                ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
+                                {
+                                    $query->where('mulai', '<=', $booking_mulai)
+                                          ->where('selesai', '>', $booking_mulai)
+                                          ->where('mulai', '<', $booking_selesai)
+                                          ->where('selesai', '>=', $booking_selesai);
+                                })
+                                ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
+                                {
+                                    $query->where('mulai', '<=', $booking_mulai)
+                                          ->where('selesai', '>=', $booking_mulai)
+                                          ->where('selesai', '<=', $booking_selesai);
+                                })
+                                ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
                                 {
                                     $query->where('mulai', '>=', $booking_mulai)
                                           ->where('selesai', '<=', $booking_selesai);
@@ -111,7 +112,7 @@ class BookingController extends Controller
 
     public function del()
     {
-        $input = Request::all();
+/*        $input = Request::all();
 
         $rules = array( 'alat' => 'required|exists:alat,id' );
         $validator = Validator::make (
@@ -133,6 +134,6 @@ class BookingController extends Controller
 
             return view('welcome');
 
-        }
+        }*/
     }
 }
