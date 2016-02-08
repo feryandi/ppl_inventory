@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/dibooking', 'AlatController@getDibooking');
 
-	Route::get('/alat', 'AlatController@alat');
+	Route::get('/alat/{id}', ['uses' => 'AlatController@alat']);
 
 	Route::get('/dipinjam', 'AlatController@getDipinjam');
 	Route::get('/dipelihara', 'AlatController@getDipelihara');
