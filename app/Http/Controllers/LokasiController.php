@@ -34,7 +34,8 @@ class LokasiController extends Controller
             $lokasi->save();
 
             //return $this->success();
-            return view('welcome');
+            //return view('welcome');
+            return redirect('/');
         }
     }
 }
