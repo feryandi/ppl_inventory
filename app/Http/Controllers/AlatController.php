@@ -110,7 +110,7 @@ class AlatController extends Controller
                                     'alat.nama as nama',
                                     'transaksi.dipinjam as mulai',
                                     'transaksi.dikembalikan as selesai',
-                                    'peminjam.nama')
+                                    'peminjam.nama as peminjam')
                                 ->get();
             return view('dipinjam', ['alat' => $available]);
         }
@@ -141,7 +141,7 @@ class AlatController extends Controller
                                     'alat.nama as nama',
                                     'transaksi.dipinjam as mulai',
                                     'transaksi.dikembalikan as selesai',
-                                    'peminjam.nama')
+                                    'peminjam.nama as peminjam')
                                 ->get();
             return view('dipinjam', ['alat' => $available]);
         }

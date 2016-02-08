@@ -36,7 +36,7 @@
                     <td><a href="#">{{$a->id}}</a></td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
-                    <td>{{$a->lokasi}}</td>
+                    <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
                     <td>{{$a->selesai}}</td>
                     <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
