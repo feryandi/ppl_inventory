@@ -181,7 +181,8 @@ class AlatController extends Controller
             $penyimpanan->save();
 
             //return $this->success();
-            return view('welcome');
+            //return view('welcome');
+            return redirect('/');
 
         }
     }
