@@ -26,6 +26,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/', 'AlatController@getAvailable');
 
+	Route::get('/cari', 'AlatController@getByName');
+
 	Route::get('/add', 'AlatController@addForm');
 
 	Route::get('/lokasi', function () {
