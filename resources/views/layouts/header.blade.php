@@ -42,7 +42,7 @@
             <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Daftar Alat Tersedia <span class="sr-only">(current)</span></a></li>
             <li class="{{ Request::is('dipinjam') ? 'active' : '' }}"><a href="{{ url('dipinjam') }}">Daftar Alat Dipinjam</a></li>
             <li class="{{ Request::is('dipelihara') ? 'active' : '' }}"><a href="{{ url('dipelihara') }}">Daftar Alat Dipelihara</a></li>
-            <li class=""><a href="#">Tambah Alat</a></li>
+            <li class="{{ Request::is('tambah') ? 'active' : '' }}"><a href="{{ url('tambah') }}">Tambah Alat</a></li>
             <li class=""><a href="#">Statistik</a></li>
           </ul>
         </div>
