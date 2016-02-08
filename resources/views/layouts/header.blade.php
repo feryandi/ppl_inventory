@@ -39,11 +39,11 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/">Daftar Alat Tersedia <span class="sr-only">(current)</span></a></li>
-            <li><a href="/dipinjam">Daftar Alat Dipinjam</a></li>
-            <li><a href="/dipelihara">Daftar Alat Dipelihara</a></li>
-            <li><a href="#">Tambah Alat</a></li>
-            <li><a href="#">Statistik</a></li>
+            <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Daftar Alat Tersedia <span class="sr-only">(current)</span></a></li>
+            <li class="{{ Request::is('dipinjam') ? 'active' : '' }}"><a href="{{ url('dipinjam') }}">Daftar Alat Dipinjam</a></li>
+            <li class="{{ Request::is('dipelihara') ? 'active' : '' }}"><a href="{{ url('dipelihara') }}">Daftar Alat Dipelihara</a></li>
+            <li class=""><a href="#">Tambah Alat</a></li>
+            <li class=""><a href="#">Statistik</a></li>
           </ul>
         </div>
         
