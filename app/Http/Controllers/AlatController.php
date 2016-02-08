@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Alat;
 use App\Lokasi;
 use App\Penyimpanan;
+use App\Transaksi;
 use Request;
 use Validator;
 use DB;
@@ -238,5 +239,39 @@ class AlatController extends Controller
             return redirect('/');
 
         }
+    }
+
+    public function statistik_frekuensi() {
+        $input = Request::all();
+        $peminjaman = NULL;
+
+        echo $input['type'];
+
+        if($input["type"] == "all") {
+            
+            $peminjaman = Transaksi::all();
+
+        } else if(is_numeric($input["type"])) {
+
+
+
+        } else {
+
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.kode')
+                                    ->where('alat.nama', '=', $input['type'])
+                                    ->select(DB::raw('count(*) as frekuensi, alat.kode'))
+                                    ->groupBy('alat.kode')
+                                    ->get();
+
+        }
+        echo $peminjaman;
+    }
+
+    public function statistik_kerusakan() {
+        
+    }
+
+    public function statistik_user() {
+        
     }
 }
