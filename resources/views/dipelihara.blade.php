@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Daftar Alat Dipinjam</h1>
+        <h1>Daftar Alat Dipelihara</h1>
         <form class="form-inline" method="GET" action="">
             <div class="form-group">
                 <label class="sr-only" for="searchInput">Cari barang</label>
@@ -18,8 +18,7 @@
                 <th>ID</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
-                <th>Peminjam</th>
-                <th>Tanggal Meminjam</th>
+                <th>Tanggal Mulai</th>
                 <th>Operasi</th>
             </tr>
             </thead>
@@ -29,7 +28,6 @@
                     <td><a href="#">{{$a->id}}</a></td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
-                    <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
                     <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
                 </tr>

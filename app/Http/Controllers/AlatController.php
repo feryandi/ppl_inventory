@@ -13,7 +13,10 @@ use App\Http\Controllers\Controller;
 date_default_timezone_set('Asia/Jakarta');
 
 class AlatController extends Controller
-{
+{ 
+    public function alat() {
+        return view('deskripsialat', []);
+    }
     public function addForm()
     {
         //$alat = Alat::all();
@@ -51,7 +54,7 @@ class AlatController extends Controller
             return view('list', ['alat' => $available]);
         }
         else {
-            $available = Alat::where('alat.nama', '=', $req['filter'])
+            $available = Alat::where('alat.nama', 'like', '%'.$req['filter'].'%')
                                 ->whereNotExists(function($query){
                                     $query->select(DB::raw(1))
                                           ->from('transaksi')
@@ -83,64 +86,35 @@ class AlatController extends Controller
     public function getDipinjam() {
         $req = Request::all();
         if (isset($req['filter'])) {
-            $available = Alat::where('alat.nama', '=', $req['filter'])
+            $available = Alat::where('alat.nama', 'like', '%'.$req['filter'].'%')
                                 ->whereExists(function($query){
                                     $query->select(DB::raw(1))
                                           ->from('transaksi')
                                           ->where('dikembalikan', '0000-00-00 00:00:00')
                                           ->whereRaw('transaksi.id_alat = alat.id');
                                 })
-                                ->whereNotExists(function($query){
-                                    $query->select(DB::raw(1))
-                                          ->from('booking')
-                                          ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
-                                          ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
-                                          ->whereRaw('booking.id_alat = alat.id');
-                                })
-                                ->whereNotExists(function($query){
-                                    $query->select(DB::raw(1))
-                                          ->from('pemeliharaan')
-                                          ->where('selesai', '0000-00-00 00:00:00')
-                                          ->whereRaw('pemeliharaan.id_alat = alat.id');
-                                })
                                 ->join('transaksi', 'transaksi.id_alat', '=', 'alat.id')
                                 ->join('peminjam', 'peminjam.id', '=', 'transaksi.id_pengguna')
                                 ->select('alat.id',
                                     'alat.kode',
                                     'alat.nama as nama',
                                     'transaksi.dipinjam as mulai',
-                                    'transaksi.dikembalikan as selesai',
                                     'peminjam.nama as peminjam')
                                 ->get();
             return view('dipinjam', ['alat' => $available]);
-        }
-        else {
+        } else {
             $available = Alat::whereExists(function($query){
                                 $query->select(DB::raw(1))
                                       ->from('transaksi')
                                       ->where('dikembalikan', '0000-00-00 00:00:00')
                                       ->whereRaw('transaksi.id_alat = alat.id');
                                 })
-                                ->whereNotExists(function($query){
-                                    $query->select(DB::raw(1))
-                                          ->from('booking')
-                                          ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
-                                          ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
-                                          ->whereRaw('booking.id_alat = alat.id');
-                                })
-                                ->whereNotExists(function($query){
-                                    $query->select(DB::raw(1))
-                                          ->from('pemeliharaan')
-                                          ->where('selesai', '0000-00-00 00:00:00')
-                                          ->whereRaw('pemeliharaan.id_alat = alat.id');
-                                })
                                 ->join('transaksi', 'transaksi.id_alat', '=', 'alat.id')
                                 ->join('peminjam', 'peminjam.id', '=', 'transaksi.id_pengguna')
                                 ->select('alat.id',
                                     'alat.kode',
                                     'alat.nama as nama',
                                     'transaksi.dipinjam as mulai',
-                                    'transaksi.dikembalikan as selesai',
                                     'peminjam.nama as peminjam')
                                 ->get();
             return view('dipinjam', ['alat' => $available]);
@@ -148,7 +122,37 @@ class AlatController extends Controller
     }
 
     public function getDipelihara() {
-
+        $req = Request::all();
+        if (isset($req['filter'])) {
+            $available = Alat::where('alat.nama', 'like', '%'.$req['filter'].'%')
+                                ->whereExists(function($query){
+                                    $query->select(DB::raw(1))
+                                          ->from('pemeliharaan')
+                                          ->where('selesai', '0000-00-00 00:00:00')
+                                          ->whereRaw('pemeliharaan.id_alat = alat.id');
+                                })
+                                ->join('pemeliharaan', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                ->select('alat.id',
+                                    'alat.kode',
+                                    'alat.nama as nama',
+                                    'pemeliharaan.mulai as mulai')
+                                ->get();
+            return view('dipelihara', ['alat' => $available]);
+        } else {
+            $available = Alat::whereExists(function($query){
+                                    $query->select(DB::raw(1))
+                                          ->from('pemeliharaan')
+                                          ->where('selesai', '0000-00-00 00:00:00')
+                                          ->whereRaw('pemeliharaan.id_alat = alat.id');
+                                })
+                                ->join('pemeliharaan', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                ->select('alat.id',
+                                    'alat.kode',
+                                    'alat.nama as nama',
+                                    'pemeliharaan.mulai as mulai')
+                                ->get();
+            return view('dipelihara', ['alat' => $available]);
+        }
     }
 
     public function add()
