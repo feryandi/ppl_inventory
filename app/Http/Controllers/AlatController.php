@@ -21,7 +21,38 @@ class AlatController extends Controller
                       ->select('alat.id as id', 'alat.nama as nama', 'lokasi.nama as lokasi', 'kode')
                       ->get();
 
-        return view('deskripsialat', ['alat' => $alat]);
+        $is_available = Alat::where('alat.id', '=', $id)
+                            ->whereNotExists(function($query){
+                                $query->select(DB::raw(1))
+                                      ->from('transaksi')
+                                      ->where('dikembalikan', '0000-00-00 00:00:00')
+                                      ->whereRaw('transaksi.id_alat = alat.id');
+                                })
+                            ->whereNotExists(function($query){
+                                $query->select(DB::raw(1))
+                                      ->from('booking')
+                                      ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                      ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                                      ->whereRaw('booking.id_alat = alat.id');
+                            })
+                            ->whereNotExists(function($query){
+                                $query->select(DB::raw(1))
+                                      ->from('pemeliharaan')
+                                      ->where('selesai', '0000-00-00 00:00:00')
+                                      ->whereRaw('pemeliharaan.id_alat = alat.id');
+                            })
+                            ->count();
+
+        $is_maintenance = Alat::where('alat.id', '=', $id)
+                                ->whereNotExists(function($query){
+                                    $query->select(DB::raw(1))
+                                          ->from('pemeliharaan')
+                                          ->where('selesai', '0000-00-00 00:00:00')
+                                          ->whereRaw('pemeliharaan.id_alat = alat.id');
+                                })
+                                ->count();
+
+        return view('deskripsialat', ['alat' => $alat, 'is_available' => $is_available, 'is_maintenance' => $is_maintenance]);
     }
 
     public function addForm()

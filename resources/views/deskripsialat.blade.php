@@ -23,12 +23,12 @@
       <tr>
         <td>Ketersediaan</td>
         <td>:</td>
-        <td>?</td>
+        <td>{{($is_available == 0)? "Tidak" : "Ya"}}</td>
       </tr>
       <tr>
         <td>Status Pemeliharaan</td>
         <td>:</td>
-        <td>?</td>
+        <td>{{($is_maintenance == 0)? "Ya" : "Tidak"}}</td>
       </tr>
       <tr>
         <td></td>
