@@ -77,6 +77,5 @@ class TransaksiController extends Controller
                   ->update(['dikembalikan' => date('Y-m-d H:i:s', time())]);
 
         return view('welcome');
-
     }
 }

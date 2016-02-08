@@ -31,6 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/alat/{id}', ['uses' => 'AlatController@alat']);
 
 	Route::get('/dipinjam', 'AlatController@getDipinjam');
+	
 	Route::get('/dipelihara', 'AlatController@getDipelihara');
 
 	Route::get('/tambah', 'AlatController@addForm');
@@ -57,6 +58,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/pemeliharaan', function () {
 	    return view('pemeliharaan');
 	});
+
+	Route::get('/pemeliharaan/selesai/{id}', ['uses' => 'PemeliharaanController@del']);
+
 	Route::post('/pemeliharaan/add', 'PemeliharaanController@add');
 
 });
