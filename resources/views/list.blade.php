@@ -3,15 +3,15 @@
 @section('content')
 <div class="page-header">
   <h1>Daftar Alat</h1>
-  <form class="form-inline">
+  <form class="form-inline" method="GET" action="/cari">
     <div class="form-group">
       <label class="sr-only" for="searchInput">Cari barang</label>
-      <select class="form-control daftar-alat">
+      <select name="filter" class="form-control daftar-alat">
         <option value="">Cari alat</option>
-        <option value="PR">Proyektor</option>
-        <option value="LP">Laptop</option>
-        <option value="KB">Keyboard</option>
-        <option value="MS">Mouse</option>
+        <option value="Proyektor">Proyektor</option>
+        <option value="Laptop">Laptop</option>
+        <option value="Keyboard">Keyboard</option>
+        <option value="Mouse">Mouse</option>
       </select>
     </div>
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
