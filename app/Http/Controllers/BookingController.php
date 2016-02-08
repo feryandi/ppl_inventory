@@ -21,13 +21,12 @@ class BookingController extends Controller
         return view('alat', ['alat' => $alat]);
     }
 
-    public function add()
+    public function add($id)
     {
         $input = Request::all();
         $peminjam = Peminjam::select('id')->where('nim/nip', $input['nipnim'])->first();
 
-        $rules = array( 'alat' => 'required|exists:alat,id', 
-                        'nipnim' => 'required|exists:peminjam,nim/nip',
+        $rules = array( 'nipnim' => 'required|exists:peminjam,nim/nip',
                         'mulai_d' => 'required',
                         'mulai_m' => 'required',
                         'mulai_y' => 'required',
@@ -56,12 +55,12 @@ class BookingController extends Controller
             $check = 0;
 
             /* Cek apakah barang sedang dipinjam oleh orang lain */
-            $check += Transaksi::where('id_alat', $input['alat'])
+            $check += Transaksi::where('id_alat', $id)
                                 ->where('dikembalikan', '0000-00-00 00:00:00')
                                 ->count();
                                 
             /* Cek apakah barang sudah dibooking oleh orang lain */
-            $check += Booking::where('id_alat', $input['alat'])
+            $check += Booking::where('id_alat', $id)
                                 ->where(function($query) use ($booking_mulai, $booking_selesai)
                                 {
                                     $query->where('mulai', '>=', $booking_mulai)
@@ -90,7 +89,7 @@ class BookingController extends Controller
 
             if ($check == 0) {
                 $booking = new Booking;
-                $booking->id_alat = $input['alat'];
+                $booking->id_alat = $id;
                 $booking->id_pengguna = $peminjam->id;
                 $booking->mulai = $booking_mulai;
                 $booking->selesai = $booking_selesai;

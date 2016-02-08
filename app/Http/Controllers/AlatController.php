@@ -174,6 +174,7 @@ class AlatController extends Controller
                                           ->whereRaw('transaksi.id_alat = alat.id');
                                 })
                                 ->join('transaksi', 'transaksi.id_alat', '=', 'alat.id')
+                                ->where('transaksi.dikembalikan', '0000-00-00 00:00:00')
                                 ->join('peminjam', 'peminjam.id', '=', 'transaksi.id_pengguna')
                                 ->select('alat.id',
                                     'alat.kode',
@@ -190,6 +191,7 @@ class AlatController extends Controller
                                       ->whereRaw('transaksi.id_alat = alat.id');
                                 })
                                 ->join('transaksi', 'transaksi.id_alat', '=', 'alat.id')
+                                ->where('transaksi.dikembalikan', '0000-00-00 00:00:00')
                                 ->join('peminjam', 'peminjam.id', '=', 'transaksi.id_pengguna')
                                 ->select('alat.id',
                                     'alat.kode',
@@ -212,6 +214,7 @@ class AlatController extends Controller
                                           ->whereRaw('pemeliharaan.id_alat = alat.id');
                                 })
                                 ->join('pemeliharaan', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                ->where('pemeliharaan.selesai', '0000-00-00 00:00:00')
                                 ->select('alat.id',
                                     'alat.kode',
                                     'alat.nama as nama',
@@ -226,6 +229,7 @@ class AlatController extends Controller
                                           ->whereRaw('pemeliharaan.id_alat = alat.id');
                                 })
                                 ->join('pemeliharaan', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                ->where('pemeliharaan.selesai', '0000-00-00 00:00:00')
                                 ->select('alat.id',
                                     'alat.kode',
                                     'alat.nama as nama',

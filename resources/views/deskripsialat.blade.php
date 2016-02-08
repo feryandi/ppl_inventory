@@ -44,26 +44,31 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="pinjamModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="pinjamModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h4 class="modal-title" id="myModalLabel">Pinjam Alat</h4>
         </div>
-        <div class="modal-body">
-          <form class="form-horizontal">
-            <div class="form-group">
-                <label for="peminjam" class="col-sm-2 control-label">Peminjam</label>
-                <div class="col-sm-10">
-                    <input type="text"  name="kode" class="form-control" id="peminjam" placeholder="Peminjam">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-default">Pinjam</button>
-                </div>
-            </div>
+        <div class="modal-body"> 
+          @include('common.errors')
+
+          <!-- New Task Form -->
+          <form action="/alat/transaksi/{{$alat[0]->id}}" method="POST" class="form-horizontal">
+              {{ csrf_field() }}
+
+              <div class="form-group">
+                  <label for="peminjam" class="col-sm-2 control-label">NIP/NIM Peminjam</label>
+                  <div class="col-sm-10">
+                      <input type="text" name="nipnim" class="form-control" id="peminjam" placeholder="Peminjam">
+                  </div>
+              </div>
+              <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Pinjam</button>
+                  </div>
+              </div>
           </form>
         </div>
       </div>
@@ -71,7 +76,7 @@
   </div>
 
   <!-- Modal -->
-  <div class="modal fade" id="bookModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="bookModal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -79,23 +84,51 @@
           <h4 class="modal-title" id="myModalLabel">Booking Alat</h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal">
+          @include('common.errors')
+
+          <!-- New Task Form -->
+          <form action="/alat/booking/{{$alat[0]->id}}" method="POST" class="form-horizontal">
+              {{ csrf_field() }}
             <div class="form-group">
-                <label for="pengguna" class="col-sm-2 control-label">Pengguna</label>
+                <label for="pengguna" class="col-sm-2 control-label">NIP/NIM Pengguna</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="pengguna" placeholder="pengguna">
+                    <input type="text" name="nipnim" class="form-control" id="pengguna" placeholder="pengguna">
                 </div>
             </div>
             <div class="form-group">
                 <label for="pinjam" class="col-sm-2 control-label">Tanggal Peminjaman</label>
-                <div class="col-sm-10">
-                    <input type="date" class="form-control" id="pinjam" placeholder="">
+                <div class="col-sm-4">
+                    D <input type="text" name="mulai_d" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    M <input type="text" name="mulai_m" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    Y <input type="text" name="mulai_y" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    H <input type="text" name="mulai_h" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    i <input type="text" name="mulai_i" id="task-name" class="form-control">
                 </div>
             </div>
             <div class="form-group">
                 <label for="pengembalian" class="col-sm-2 control-label">Tanggal Pengembalian</label>
-                <div class="col-sm-10">
-                    <input type="date" class="form-control" id="pengembalian" placeholder="">
+                <div class="col-sm-4">
+                    D <input type="text" name="selesai_d" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    M <input type="text" name="selesai_m" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    Y <input type="text" name="selesai_y" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    H <input type="text" name="selesai_h" id="task-name" class="form-control">
+                </div>
+                <div class="col-sm-4">
+                    i <input type="text" name="selesai_i" id="task-name" class="form-control">
                 </div>
             </div>
             <div class="form-group">
@@ -104,6 +137,7 @@
                 </div>
             </div>
           </form>
+
         </div>
       </div>
     </div>
