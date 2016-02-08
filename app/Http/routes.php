@@ -29,8 +29,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/dibooking', 'AlatController@getDibooking');
 
 	Route::get('/alat/{id}', ['uses' => 'AlatController@alat']);
+	Route::post('/alat/transaksi/{id}', ['uses' => 'TransaksiController@add']);
+	Route::post('/alat/booking/{id}', ['uses' => 'BookingController@add']);
 
 	Route::get('/dipinjam', 'AlatController@getDipinjam');
+	
 	Route::get('/dipelihara', 'AlatController@getDipelihara');
 
 	Route::get('/tambah', 'AlatController@addForm');
@@ -41,12 +44,12 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/lokasi/add', 'LokasiController@add');
 
 	Route::post('/task', 'AlatController@add');
-	Route::post('/task2', 'TransaksiController@add');
-	Route::post('/task3', 'TransaksiController@del');
 
 	Route::get('/transaksi', function () {
 	    return view('transaksi');
 	});
+
+	Route::get('/transaksi/selesai/{id}', ['uses' => 'TransaksiController@del']);
 
 	Route::get('/booking', function () {
 	    return view('booking');
@@ -56,6 +59,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/pemeliharaan', function () {
 	    return view('pemeliharaan');
 	});
+
+	Route::get('/pemeliharaan/selesai/{id}', ['uses' => 'PemeliharaanController@del']);
+
 	Route::post('/pemeliharaan/add', 'PemeliharaanController@add');
 
 	Route::get('/statistik/frekuensi/', 'AlatController@statistik_frekuensi');

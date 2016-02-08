@@ -22,7 +22,38 @@ class AlatController extends Controller
                       ->select('alat.id as id', 'alat.nama as nama', 'lokasi.nama as lokasi', 'kode')
                       ->get();
 
-        return view('deskripsialat', ['alat' => $alat]);
+        $is_available = Alat::where('alat.id', '=', $id)
+                            ->whereNotExists(function($query){
+                                $query->select(DB::raw(1))
+                                      ->from('transaksi')
+                                      ->where('dikembalikan', '0000-00-00 00:00:00')
+                                      ->whereRaw('transaksi.id_alat = alat.id');
+                                })
+                            ->whereNotExists(function($query){
+                                $query->select(DB::raw(1))
+                                      ->from('booking')
+                                      ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                      ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                                      ->whereRaw('booking.id_alat = alat.id');
+                            })
+                            ->whereNotExists(function($query){
+                                $query->select(DB::raw(1))
+                                      ->from('pemeliharaan')
+                                      ->where('selesai', '0000-00-00 00:00:00')
+                                      ->whereRaw('pemeliharaan.id_alat = alat.id');
+                            })
+                            ->count();
+
+        $is_maintenance = Alat::where('alat.id', '=', $id)
+                                ->whereNotExists(function($query){
+                                    $query->select(DB::raw(1))
+                                          ->from('pemeliharaan')
+                                          ->where('selesai', '0000-00-00 00:00:00')
+                                          ->whereRaw('pemeliharaan.id_alat = alat.id');
+                                })
+                                ->count();
+
+        return view('deskripsialat', ['alat' => $alat, 'is_available' => $is_available, 'is_maintenance' => $is_maintenance]);
     }
 
     public function addForm()
@@ -144,6 +175,7 @@ class AlatController extends Controller
                                           ->whereRaw('transaksi.id_alat = alat.id');
                                 })
                                 ->join('transaksi', 'transaksi.id_alat', '=', 'alat.id')
+                                ->where('transaksi.dikembalikan', '0000-00-00 00:00:00')
                                 ->join('peminjam', 'peminjam.id', '=', 'transaksi.id_pengguna')
                                 ->select('alat.id',
                                     'alat.kode',
@@ -160,6 +192,7 @@ class AlatController extends Controller
                                       ->whereRaw('transaksi.id_alat = alat.id');
                                 })
                                 ->join('transaksi', 'transaksi.id_alat', '=', 'alat.id')
+                                ->where('transaksi.dikembalikan', '0000-00-00 00:00:00')
                                 ->join('peminjam', 'peminjam.id', '=', 'transaksi.id_pengguna')
                                 ->select('alat.id',
                                     'alat.kode',
@@ -182,6 +215,7 @@ class AlatController extends Controller
                                           ->whereRaw('pemeliharaan.id_alat = alat.id');
                                 })
                                 ->join('pemeliharaan', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                ->where('pemeliharaan.selesai', '0000-00-00 00:00:00')
                                 ->select('alat.id',
                                     'alat.kode',
                                     'alat.nama as nama',
@@ -196,6 +230,7 @@ class AlatController extends Controller
                                           ->whereRaw('pemeliharaan.id_alat = alat.id');
                                 })
                                 ->join('pemeliharaan', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                ->where('pemeliharaan.selesai', '0000-00-00 00:00:00')
                                 ->select('alat.id',
                                     'alat.kode',
                                     'alat.nama as nama',
