@@ -13,7 +13,10 @@ use App\Http\Controllers\Controller;
 date_default_timezone_set('Asia/Jakarta');
 
 class AlatController extends Controller
-{
+{ 
+    public function alat() {
+        return view('deskripsialat', []);
+    }
     public function addForm()
     {
         //$alat = Alat::all();
