@@ -1,34 +1,34 @@
 @extends('layouts.header')
 @section('content')
   <div class="page-header">
-    <h1>Nama Alat</h1>
+    <h1>{{$alat[0]->nama}}</h1>
   </div>
   <div class="alat">
     <table class="deskripsi-alat">
       <tr>
         <td>ID</td>
         <td>:</td>
-        <td>1</td>
+        <td>{{$alat[0]->id}}</td>
       </tr>
       <tr>
         <td>Kode Barang</td>
         <td>:</td>
-        <td>PR</td>
+        <td>{{$alat[0]->kode}}</td>
       </tr>
       <tr>
         <td>Lokasi</td>
         <td>:</td>
-        <td>Meja A</td>
+        <td>{{$alat[0]->lokasi}}</td>
       </tr>
       <tr>
         <td>Ketersediaan</td>
         <td>:</td>
-        <td>Tersedia</td>
+        <td>?</td>
       </tr>
       <tr>
         <td>Status Pemeliharaan</td>
         <td>:</td>
-        <td>Berfungsi</td>
+        <td>?</td>
       </tr>
       <tr>
         <td></td>

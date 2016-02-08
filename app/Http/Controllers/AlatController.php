@@ -14,9 +14,16 @@ date_default_timezone_set('Asia/Jakarta');
 
 class AlatController extends Controller
 { 
-    public function alat() {
-        return view('deskripsialat', []);
+    public function alat($id) {
+        $alat = Alat::where('alat.id', '=', $id)
+                      ->join('penyimpanan', 'penyimpanan.id_alat', '=', 'alat.id')
+                      ->join('lokasi', 'lokasi.id', '=', 'penyimpanan.id_lokasi')
+                      ->select('alat.id as id', 'alat.nama as nama', 'lokasi.nama as lokasi', 'kode')
+                      ->get();
+
+        return view('deskripsialat', ['alat' => $alat]);
     }
+
     public function addForm()
     {
         //$alat = Alat::all();
