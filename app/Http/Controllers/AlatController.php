@@ -44,7 +44,7 @@ class AlatController extends Controller
                             })
                             ->join('penyimpanan', 'penyimpanan.id_alat', '=', 'alat.id')
                             ->join('lokasi', 'lokasi.id', '=', 'penyimpanan.id_lokasi')
-                            ->select('alat.id', 'alat.nama as nama', 'lokasi.nama as lokasi')
+                            ->select('alat.id', 'alat.nama as nama', 'lokasi.nama as lokasi', 'kode')
                             ->get();
         return view('list', ['alat' => $available]);
     }

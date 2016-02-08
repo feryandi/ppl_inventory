@@ -8,36 +8,28 @@
     
     <!-- Display Validation Errors -->
     @include('common.errors')
-    <form class="form-horizontal">
+    <form action="/task" method="POST" class="form-horizontal">
         {{ csrf_field() }}
         <div class="form-group">
             <label for="inputKodeAlat" class="col-sm-2 control-label">Kode</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputKodeAlat" placeholder="Kode alat">
+                <input type="text"  name="kode" class="form-control" id="inputKodeAlat" placeholder="Kode alat">
             </div>
         </div>
         <div class="form-group">
             <label for="inputNamaAlat" class="col-sm-2 control-label">Nama</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputNamaAlat" placeholder="Nama alat">
+                <input type="text"  name="nama" class="form-control" id="inputNamaAlat" placeholder="Nama alat">
             </div>
         </div>
         <div class="form-group">
             <label for="inputLokasiAlat" class="col-sm-2 control-label">Lokasi</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="inputLokasiAlat" placeholder="Lokasi alat">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputKetersediaanAlat" class="col-sm-2 control-label">Ketersediaan</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputKetersediaanAlat" placeholder="Ketersediaan alat">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="inputStatusPemeliharaanAlat" class="col-sm-2 control-label">Status Pemeliharaan</label>
-            <div class="col-sm-10">
-                <input type="email" class="form-control" id="inputStatusPemeliharaanAlat" placeholder="Status pemeliharaan alat">
+                <select class="form-control" name="lokasi">
+                @foreach ($lokasi as $l)
+                    <option name="lokasi" value="{{$l->id}}">{{$l->nama}}</option>
+                @endforeach
+                </select>
             </div>
         </div>
         <div class="form-group">
