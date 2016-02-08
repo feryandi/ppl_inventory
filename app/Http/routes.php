@@ -28,6 +28,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/cari', 'AlatController@getByName');
 
+	Route::get('/dipinjam', 'AlatController@getDipinjam');
+
 	Route::get('/add', 'AlatController@addForm');
 
 	Route::get('/lokasi', function () {

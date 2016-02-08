@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="page-header">
-  <h1>Daftar Alat</h1>
+  <h1>Daftar Alat Tersedia</h1>
   <form class="form-inline" method="GET" action="/cari">
     <div class="form-group">
       <label class="sr-only" for="searchInput">Cari barang</label>
       <select name="filter" class="form-control daftar-alat">
-        <option value="">Cari alat</option>
+        <option value="">Kategori</option>
         <option value="Proyektor">Proyektor</option>
         <option value="Laptop">Laptop</option>
         <option value="Keyboard">Keyboard</option>
@@ -24,9 +24,8 @@
         <th>ID</th>
         <th>Kode Barang</th>
         <th>Nama Barang</th>
-        <th>Ketersediaan</th>
         <th>Lokasi</th>
-        <th>Status Pemeliharaan</th>
+        <th>Operasi</th>
       </tr>
     </thead>
     <tbody>
@@ -35,9 +34,8 @@
         <td><a href="#">{{$a->id}}</a></td>
         <td>{{$a->kode}}</td>
         <td>{{$a->nama}}</td>
-        <td>Tersedia</td>
         <td>{{$a->lokasi}}</td>
-        <td></td>
+        <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
       </tr>
       @endforeach
     </tbody>
