@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Lokasi;
+use Validator;
 use Request;
 use App\Http\Controllers\Controller;
 
