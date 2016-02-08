@@ -30,134 +30,16 @@
       </tr>
     </thead>
     <tbody>
+      @foreach ($alat as $a)
       <tr>
-        <td><a href="#">1,001</a></td>
-        <td>Lorem</td>
-        <td>ipsum</td>
-        <td>dolor</td>
-        <td>dolor</td>
-        <td>sit</td>
+        <td><a href="#">{{$a->id}}</a></td>
+        <td>{{$a->kode}}</td>
+        <td>{{$a->nama}}</td>
+        <td>Tersedia</td>
+        <td>{{$a->lokasi}}</td>
+        <td></td>
       </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>amet</td>
-        <td>consectetur</td>
-        <td>adipiscing</td>
-        <td>adipiscing</td>
-        <td>elit</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>Integer</td>
-        <td>nec</td>
-        <td>odio</td>
-        <td>odio</td>
-        <td>Praesent</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>libero</td>
-        <td>Sed</td>
-        <td>odio</td>
-        <td>cursus</td>
-        <td>ante</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>dapibus</td>
-        <td>diam</td>
-        <td>odio</td>
-        <td>Sed</td>
-        <td>nisi</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>Nulla</td>
-        <td>quis</td>
-        <td>odio</td>
-        <td>sem</td>
-        <td>at</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>nibh</td>
-        <td>elementum</td>
-        <td>odio</td>
-        <td>imperdiet</td>
-        <td>Duis</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>sagittis</td>
-        <td>ipsum</td>
-        <td>odio</td>
-        <td>Praesent</td>
-        <td>mauris</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>Fusce</td>
-        <td>nec</td>
-        <td>odio</td>
-        <td>tellus</td>
-        <td>sed</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>augue</td>
-        <td>semper</td>
-        <td>odio</td>
-        <td>porta</td>
-        <td>Mauris</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>massa</td>
-        <td>Vestibulum</td>
-        <td>odio</td>
-        <td>lacinia</td>
-        <td>arcu</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>eget</td>
-        <td>odio</td>
-        <td>nulla</td>
-        <td>Class</td>
-        <td>aptent</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>taciti</td>
-        <td>odio</td>
-        <td>sociosqu</td>
-        <td>ad</td>
-        <td>litora</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>torquent</td>
-        <td>odio</td>
-        <td>per</td>
-        <td>conubia</td>
-        <td>nostra</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>per</td>
-        <td>inceptos</td>
-        <td>odio</td>
-        <td>himenaeos</td>
-        <td>Curabitur</td>
-      </tr>
-      <tr>
-        <td><a href="#">1,001</a></td>
-        <td>sodales</td>
-        <td>odio</td>
-        <td>ligula</td>
-        <td>in</td>
-        <td>libero</td>
-      </tr>
+      @endforeach
     </tbody>
   </table>
 </div>

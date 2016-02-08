@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Lokasi;
 use Validator;
 use Request;
+use Validator;
 use App\Http\Controllers\Controller;
 
 class LokasiController extends Controller
