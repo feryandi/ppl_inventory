@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="page-header">
-        <h1>Daftar Alat Dipelihara</h1>
-        <form class="form-inline" method="GET" action="/dipelihara">
+        <h1>Daftar Alat Dibooking</h1>
+        <form class="form-inline" method="GET" action="/dibooking">
             <div class="form-group">
                 <label class="sr-only" for="searchInput">Cari barang</label>
                 <input type="text" name="filter" class="form-control" id="inputFilter" placeholder="Nama alat">
@@ -18,7 +18,9 @@
                 <th>ID</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
-                <th>Tanggal Mulai</th>
+                <th>Peminjam</th>
+                <th>Mulai</th>
+                <th>Selesai</th>
                 <th>Operasi</th>
             </tr>
             </thead>
@@ -28,7 +30,9 @@
                     <td><a href="#">{{$a->id}}</a></td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
+                    <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
+                    <td>{{$a->selesai}}</td>
                     <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
                 </tr>
             @endforeach

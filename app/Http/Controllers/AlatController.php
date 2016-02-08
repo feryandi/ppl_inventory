@@ -83,6 +83,48 @@ class AlatController extends Controller
 
     }
 
+    public function getDibooking() {
+        $req = Request::all();
+        if (isset($req['filter'])) {
+            $available = Alat::where('alat.nama', 'like', '%'.$req['filter'].'%')
+                                ->whereExists(function($query){
+                                    $query->select(DB::raw(1))
+                                          ->from('booking')
+                                          ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                          ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                                          ->whereRaw('booking.id_alat = alat.id');
+                                })
+                                ->join('booking', 'booking.id_alat', '=', 'alat.id')
+                                ->join('peminjam', 'peminjam.id', '=', 'booking.id_pengguna')
+                                ->select('alat.id',
+                                    'alat.kode',
+                                    'alat.nama as nama',
+                                    'booking.mulai as mulai',
+                                    'booking.selesai as selesai',
+                                    'peminjam.nama as peminjam')
+                                ->get();
+            return view('dibooking', ['alat' => $available]);
+        } else {
+            $available = Alat::whereNotExists(function($query){
+                                    $query->select(DB::raw(1))
+                                          ->from('booking')
+                                          ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                          ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                                          ->whereRaw('booking.id_alat = alat.id');
+                                     })
+                                    ->join('booking', 'booking.id_alat', '=', 'alat.id')
+                                    ->join('peminjam', 'peminjam.id', '=', 'booking.id_pengguna')
+                                    ->select('alat.id',
+                                        'alat.kode',
+                                        'alat.nama as nama',
+                                        'booking.mulai as mulai',
+                                        'booking.selesai as selesai',
+                                        'peminjam.nama as peminjam')
+                                    ->get();
+            return view('dibooking', ['alat' => $available]);
+        }
+    }
+
     public function getDipinjam() {
         $req = Request::all();
         if (isset($req['filter'])) {

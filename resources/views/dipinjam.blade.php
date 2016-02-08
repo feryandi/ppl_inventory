@@ -3,7 +3,7 @@
 @section('content')
     <div class="page-header">
         <h1>Daftar Alat Dipinjam</h1>
-        <form class="form-inline" method="GET" action="">
+        <form class="form-inline" method="GET" action="/dipinjam">
             <div class="form-group">
                 <label class="sr-only" for="searchInput">Cari barang</label>
                 <input type="text" name="filter" class="form-control" id="inputFilter" placeholder="Nama alat">
