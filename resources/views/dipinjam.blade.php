@@ -20,7 +20,7 @@
                 <th>Nama Barang</th>
                 <th>Peminjam</th>
                 <th>Tanggal Meminjam</th>
-                <th>Operasi</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -31,7 +31,7 @@
                     <td>{{$a->nama}}</td>
                     <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
-                    <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
+                    <td><a href="{{ url('transaksi/selesai/'.$a->id) }}"><button class="btn btn-success">Transaksi Selesai</button></a></td>
                 </tr>
             @endforeach
             </tbody>

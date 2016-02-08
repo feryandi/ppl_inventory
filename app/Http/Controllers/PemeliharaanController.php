@@ -75,7 +75,7 @@ class PemeliharaanController extends Controller
 
     public function del()
     {
-/*        $input = Request::all();
+        $input = Request::all();
 
         $rules = array( 'alat' => 'required|exists:alat,id' );
         $validator = Validator::make (
@@ -97,6 +97,6 @@ class PemeliharaanController extends Controller
 
             return view('welcome');
 
-        }*/
+        }
     }
 }

@@ -42,11 +42,12 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('/task', 'AlatController@add');
 	Route::post('/task2', 'TransaksiController@add');
-	Route::post('/task3', 'TransaksiController@del');
 
 	Route::get('/transaksi', function () {
 	    return view('transaksi');
 	});
+
+	Route::get('/transaksi/selesai/{id}', ['uses' => 'TransaksiController@del']);
 
 	Route::get('/booking', function () {
 	    return view('booking');

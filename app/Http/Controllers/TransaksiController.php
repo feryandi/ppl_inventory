@@ -70,30 +70,13 @@ class TransaksiController extends Controller
     
     }
 
-    public function del()
+    public function del($id)
     {
-        $input = Request::all();
+        Transaksi::where('id_alat', $id)
+                  ->where('dikembalikan', '0000-00-00 00:00:00')
+                  ->update(['dikembalikan' => date('Y-m-d H:i:s', time())]);
 
-        $rules = array( 'alat' => 'required|exists:alat,id' );
-        $validator = Validator::make (
-            $input,
-            $rules
-        );
+        return view('welcome');
 
-        if($validator->fails()) {
-
-            //return $this->failed(array('message' => $validator->messages()));
-            echo "Validation";
-            return view('welcome');
-
-        } else {
-
-            Transaksi::where('id_alat', $input['alat'])
-                      ->where('dikembalikan', '0000-00-00 00:00:00')
-                      ->update(['dikembalikan' => date('Y-m-d H:i:s', time())]);
-
-            return view('welcome');
-
-        }
     }
 }
