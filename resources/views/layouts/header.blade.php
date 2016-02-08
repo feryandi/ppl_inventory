@@ -43,6 +43,7 @@
             <li class="{{ Request::is('dipinjam') ? 'active' : '' }}"><a href="{{ url('dipinjam') }}">Daftar Alat Dipinjam</a></li>
             <li class="{{ Request::is('dipelihara') ? 'active' : '' }}"><a href="{{ url('dipelihara') }}">Daftar Alat Dipelihara</a></li>
             <li class="{{ Request::is('tambah') ? 'active' : '' }}"><a href="{{ url('tambah') }}">Tambah Alat</a></li>
+            <li class="{{ Request::is('lokasi') ? 'active' : '' }}"><a href="{{ url('lokasi') }}">Tambah Lokasi</a></li>
             <li class=""><a href="#">Statistik</a></li>
           </ul>
         </div>
