@@ -3,6 +3,7 @@
   <div class="page-header">
     <h1>{{$alat[0]->nama}}</h1>
   </div>
+  
   <div class="alat">
     <table class="deskripsi-alat">
       <tr>
@@ -45,6 +46,23 @@
     <div class="aksi-alat">
         <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#pinjamModal">Pinjam</a>
         <a href="#" class="btn btn-success" data-toggle="modal" data-target="#bookModal">Book</a>
+    </div>
+  </div>
+
+  <div class="riwayat">
+    <div class="page-header">
+      <h3>Riwayaat Penggunaan Alat</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Pengguna</th>
+              <th>Tanggal Peminjaman</th>
+              <th>Tanggal Pengembalian</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
   </div>
 
