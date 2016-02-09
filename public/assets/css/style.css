@@ -124,3 +124,9 @@ body {
 .form-horizontal .control-label {
   text-align: left;
 }
+
+.input-date input {
+  width: 40px;
+  display: inline-block;
+  margin-right: 10px;
+}

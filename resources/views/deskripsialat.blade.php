@@ -101,39 +101,23 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="pinjam" class="col-sm-2 control-label">Tanggal Peminjaman</label>
-                <div class="col-sm-4">
-                    D <input type="text" name="mulai_d" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    M <input type="text" name="mulai_m" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    Y <input type="text" name="mulai_y" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    H <input type="text" name="mulai_h" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    i <input type="text" name="mulai_i" id="task-name" class="form-control">
+                <label class="col-sm-2 control-label">Tanggal Peminjaman</label>
+                <div class="col-sm-10 input-date">
+                  D <input type="text" name="mulai_d" id="task-name" class="form-control">
+                  M <input type="text" name="mulai_m" id="task-name" class="form-control">
+                  Y <input type="text" name="mulai_y" id="task-name" class="form-control">
+                  H <input type="text" name="mulai_h" id="task-name" class="form-control">
+                  i <input type="text" name="mulai_i" id="task-name" class="form-control">
                 </div>
             </div>
             <div class="form-group">
-                <label for="pengembalian" class="col-sm-2 control-label">Tanggal Pengembalian</label>
-                <div class="col-sm-4">
-                    D <input type="text" name="selesai_d" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    M <input type="text" name="selesai_m" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    Y <input type="text" name="selesai_y" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    H <input type="text" name="selesai_h" id="task-name" class="form-control">
-                </div>
-                <div class="col-sm-4">
-                    i <input type="text" name="selesai_i" id="task-name" class="form-control">
+                <label class="col-sm-2 control-label">Tanggal Pengembalian</label>
+                <div class="col-sm-10 input-date">
+                  D <input type="text" name="selesai_d" id="task-name" class="form-control">
+                  M <input type="text" name="selesai_m" id="task-name" class="form-control">
+                  Y <input type="text" name="selesai_y" id="task-name" class="form-control">
+                  H <input type="text" name="selesai_h" id="task-name" class="form-control">
+                  i <input type="text" name="selesai_i" id="task-name" class="form-control">
                 </div>
             </div>
             <div class="form-group">
