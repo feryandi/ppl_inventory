@@ -23,12 +23,17 @@
       <tr>
         <td>Ketersediaan</td>
         <td>:</td>
-        <td>{{($is_available == 0)? "Tidak" : "Ya"}}</td>
+        <td>{{($is_available == 0)? "Tidak tersedia" : "Tersedia"}}</td>
       </tr>
       <tr>
         <td>Status Pemeliharaan</td>
         <td>:</td>
-        <td>{{($is_maintenance == 0)? "Ya" : "Tidak"}}</td>
+        <td>
+          {{($is_maintenance == 0)? "Sedang perbaikan" : "Berfungsi"}} |
+          <a href="" class="btn btn-primary btn-sm">
+            {{($is_maintenance == 0)? "Selesai perbaikan" : "Perbaiki"}}
+          </a>
+        </td>
       </tr>
       <tr>
         <td></td>
