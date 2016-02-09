@@ -22,25 +22,25 @@ class PemeliharaanController extends Controller
         $check = 0;
 
         /* Cek apakah barang sedang dipinjam oleh orang lain */
-        $check += Transaksi::where('id_alat', $input['alat'])
+        $check += Transaksi::where('id_alat', $id)
                             ->where('dikembalikan', '0000-00-00 00:00:00')
                             ->count();
 
         /* Cek apakah barang sudah dibooking oleh orang lain, kalo dibooking orang tersebut, boleh */
-        $check += Booking::where('id_alat', $input['alat'])
+        $check += Booking::where('id_alat', $id)
                             ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
                             ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
                             ->count();
 
         /* Cek apakah barang sedang dipelihara */
-        $check += Pemeliharaan::where('id_alat', $input['alat'])
+        $check += Pemeliharaan::where('id_alat', $id)
                             ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
                             ->where('selesai', '0000-00-00 00:00:00')
                             ->count();
 
         if ($check == 0) {
             $pemeliharaan = new Pemeliharaan;
-            $pemeliharaan->id_alat = $input['alat'];
+            $pemeliharaan->id_alat = $id;
             $pemeliharaan->mulai = date('Y-m-d H:i:s', time());
             $pemeliharaan->save();
 

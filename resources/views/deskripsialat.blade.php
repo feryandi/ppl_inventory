@@ -30,10 +30,16 @@
         <td>Status Pemeliharaan</td>
         <td>:</td>
         <td>
-          {{($is_maintenance == 0)? "Sedang perbaikan" : "Berfungsi"}} |
-          <a href="" class="btn btn-primary btn-sm">
-            {{($is_maintenance == 0)? "Selesai perbaikan" : "Perbaiki"}}
-          </a>
+          {{($is_maintenance == 0)? "Sedang perbaikan" : "Berfungsi" }} |
+          @if ($is_maintenance == 0)
+            <a href="{{ url('/pemeliharaan/selesai/' . $alat[0]->id) }}" class="btn btn-primary btn-sm">
+              Selesai Perbaikan
+            </a>
+          @else
+            <a href="{{ url('/alat/pemeliharaan/' . $alat[0]->id) }}" class="btn btn-primary btn-sm">
+              Lakukan Pemeliharaan
+            </a>
+          @endif
         </td>
       </tr>
       <tr>
