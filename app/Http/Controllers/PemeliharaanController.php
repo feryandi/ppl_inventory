@@ -17,58 +17,42 @@ date_default_timezone_set('Asia/Jakarta');
 
 class PemeliharaanController extends Controller
 {
-    public function add()
+    public function add($id)
     {
-        $input = Request::all();
+        $check = 0;
 
-        $rules = array( 'alat' => 'required|exists:alat,id' );
-        $validator = Validator::make (
-            $input,
-            $rules
-        );
+        /* Cek apakah barang sedang dipinjam oleh orang lain */
+        $check += Transaksi::where('id_alat', $input['alat'])
+                            ->where('dikembalikan', '0000-00-00 00:00:00')
+                            ->count();
 
-        if($validator->fails()) {
+        /* Cek apakah barang sudah dibooking oleh orang lain, kalo dibooking orang tersebut, boleh */
+        $check += Booking::where('id_alat', $input['alat'])
+                            ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                            ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                            ->count();
 
-            //return $this->failed(array('message' => $validator->messages()));
-            echo "Validation";
+        /* Cek apakah barang sedang dipelihara */
+        $check += Pemeliharaan::where('id_alat', $input['alat'])
+                            ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                            ->where('selesai', '0000-00-00 00:00:00')
+                            ->count();
+
+        if ($check == 0) {
+            $pemeliharaan = new Pemeliharaan;
+            $pemeliharaan->id_alat = $input['alat'];
+            $pemeliharaan->mulai = date('Y-m-d H:i:s', time());
+            $pemeliharaan->save();
+
+            //return $this->success();
             return view('welcome');
 
         } else {
-            $check = 0;
 
-            /* Cek apakah barang sedang dipinjam oleh orang lain */
-            $check += Transaksi::where('id_alat', $input['alat'])
-                                ->where('dikembalikan', '0000-00-00 00:00:00')
-                                ->count();
+            //return $this->failed(array('message' => "Barang belum dikembalikan"));
+            echo "Barang tidak tersedia";
+            return view('welcome');
 
-            /* Cek apakah barang sudah dibooking oleh orang lain, kalo dibooking orang tersebut, boleh */
-            $check += Booking::where('id_alat', $input['alat'])
-                                ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
-                                ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
-                                ->count();
-
-            /* Cek apakah barang sedang dipelihara */
-            $check += Pemeliharaan::where('id_alat', $input['alat'])
-                                ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
-                                ->where('selesai', '0000-00-00 00:00:00')
-                                ->count();
-
-            if ($check == 0) {
-                $pemeliharaan = new Pemeliharaan;
-                $pemeliharaan->id_alat = $input['alat'];
-                $pemeliharaan->mulai = date('Y-m-d H:i:s', time());
-                $pemeliharaan->save();
-
-                //return $this->success();
-                return view('welcome');
-
-            } else {
-
-                //return $this->failed(array('message' => "Barang belum dikembalikan"));
-                echo "Barang tidak tersedia";
-                return view('welcome');
-
-            }
         }
     
     }
