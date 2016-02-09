@@ -33,6 +33,7 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/alat/{id}', ['uses' => 'AlatController@alat']);
 	Route::post('/alat/transaksi/{id}', ['uses' => 'TransaksiController@add']);
 	Route::post('/alat/booking/{id}', ['uses' => 'BookingController@add']);
+	Route::post('/alat/pemeliharaan/{id}', ['uses' => 'PemeliharaanController@add']);
 
 	Route::get('/dipinjam', 'AlatController@getDipinjam');
 	
