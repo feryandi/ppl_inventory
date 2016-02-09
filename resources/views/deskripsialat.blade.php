@@ -33,7 +33,7 @@
       <tr>
         <td></td>
         <td></td>
-        <td><a href="">Edit</a> | <a href="">Hapus</a></td>
+        <td><a href="{{ url('/alat/edit/' . $alat[0]->id) }}">Edit</a> | <a href="">Hapus</a></td>
       </tr>
     </table>
     

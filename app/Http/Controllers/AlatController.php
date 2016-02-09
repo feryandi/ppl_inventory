@@ -56,6 +56,9 @@ class AlatController extends Controller
         return view('deskripsialat', ['alat' => $alat, 'is_available' => $is_available, 'is_maintenance' => $is_maintenance]);
     }
 
+    public function edit() {
+      return view('editalat');  
+    }
     public function addForm()
     {
         //$alat = Alat::all();

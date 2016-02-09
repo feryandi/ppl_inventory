@@ -28,6 +28,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/dibooking', 'AlatController@getDibooking');
 
+	Route::get('/alat/edit/{id}', ['uses' => 'AlatController@edit']);
+
 	Route::get('/alat/{id}', ['uses' => 'AlatController@alat']);
 	Route::post('/alat/transaksi/{id}', ['uses' => 'TransaksiController@add']);
 	Route::post('/alat/booking/{id}', ['uses' => 'BookingController@add']);
