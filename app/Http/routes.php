@@ -44,10 +44,11 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/tambah', 'AlatController@addForm');
 
-	Route::get('/lokasi', function () {
-	    return view('lokasi');
-	});
+	Route::get('/lokasi', 'LokasiController@listPage');
 	Route::post('/lokasi/add', 'LokasiController@add');
+	Route::post('/lokasi/edit/{id}', ['uses' => 'LokasiController@edit']);
+	Route::get('/lokasi/hapus/{id}', ['uses' => 'LokasiController@del']);
+	Route::post('/lokasi/hapus/{id}', ['uses' => 'LokasiController@doDelete']);
 
 	Route::post('/task', 'AlatController@add');
 

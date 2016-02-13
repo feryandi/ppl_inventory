@@ -39,12 +39,12 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Daftar Alat Tersedia <span class="sr-only">(current)</span></a></li>
-            <li class="{{ Request::is('dibooking') ? 'active' : '' }}"><a href="{{ url('dibooking') }}">Daftar Alat Dibooking</a></li>
-            <li class="{{ Request::is('dipinjam') ? 'active' : '' }}"><a href="{{ url('dipinjam') }}">Daftar Alat Dipinjam</a></li>
-            <li class="{{ Request::is('dipelihara') ? 'active' : '' }}"><a href="{{ url('dipelihara') }}">Daftar Alat Dipelihara</a></li>
+            <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="{{ url('/') }}">Alat Tersedia <span class="sr-only">(current)</span></a></li>
+            <li class="{{ Request::is('dibooking') ? 'active' : '' }}"><a href="{{ url('dibooking') }}">Alat Dibooking</a></li>
+            <li class="{{ Request::is('dipinjam') ? 'active' : '' }}"><a href="{{ url('dipinjam') }}">Alat Dipinjam</a></li>
+            <li class="{{ Request::is('dipelihara') ? 'active' : '' }}"><a href="{{ url('dipelihara') }}">Alat Dipelihara</a></li>
             <li class="{{ Request::is('tambah') ? 'active' : '' }}"><a href="{{ url('tambah') }}">Tambah Alat</a></li>
-            <li class="{{ Request::is('lokasi') ? 'active' : '' }}"><a href="{{ url('lokasi') }}">Tambah Lokasi</a></li>
+            <li class="{{ Request::is('lokasi') ? 'active' : '' }}"><a href="{{ url('lokasi') }}">Lokasi</a></li>
             <li class=""><a href="#">Statistik</a></li>
           </ul>
         </div>
@@ -57,7 +57,7 @@
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ URL::asset('assets/js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ URL::asset('assets/js/jquery-ui/jquery-ui.js') }}"></script>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
