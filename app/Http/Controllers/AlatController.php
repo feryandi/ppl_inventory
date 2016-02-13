@@ -6,6 +6,7 @@ use App\Alat;
 use App\Lokasi;
 use App\Penyimpanan;
 use App\Transaksi;
+use App\Pemeliharaan;
 use Request;
 use Validator;
 use DB;
@@ -53,16 +54,69 @@ class AlatController extends Controller
                                 })
                                 ->count();
 
-        return view('deskripsialat', ['alat' => $alat, 'is_available' => $is_available, 'is_maintenance' => $is_maintenance]);
+        $history_t = Transaksi::where('id_alat', '=', $id)
+                            ->join('peminjam', 'transaksi.id_pengguna',  '=', 'peminjam.id')
+                            ->select('dipinjam', 'dikembalikan', 'nim/nip as id', 'nama')
+                            ->get();
+
+        $history_m = Pemeliharaan::where('id_alat', '=', $id)
+                            ->get();
+
+        return view('deskripsialat', ['alat' => $alat, 'is_available' => $is_available, 'is_maintenance' => $is_maintenance, 'history_t' => $history_t, 'history_m' => $history_m]);
+    }
+
+    public function getEdit($id) {
+      $lokasi = Lokasi::all();
+      $alat = Alat::where('alat.id', '=', $id)
+                    ->join('penyimpanan', 'penyimpanan.id_alat', '=', 'alat.id')
+                    ->select('alat.id as id', 'nama', 'kode', 'id_lokasi')
+                    ->get();
+      return view('editalat', ['alat' => $alat[0], 'lokasi' => $lokasi]);  
     }
 
     public function edit() {
-      return view('editalat');  
+      $input = Request::all();
+
+      $rules = array( 'id' => 'required|exists:alat,id',
+                      'lokasi' => 'required|exists:lokasi,id',
+                      'nama' => 'required',
+                      'kode' => 'required' );
+      $validator = Validator::make (
+          $input,
+          $rules
+      );
+
+      if($validator->fails()) {
+
+          //return $this->failed(array('message' => $validator->messages()));
+          echo "Validation";
+          //return redirect('/');
+
+      } else {
+
+          $alat = Alat::find($input['id']);
+          $alat->nama = $input['nama'];
+          $alat->kode = $input['kode'];
+          $alat->save();
+
+          $penyimpanan = Penyimpanan::where('id_alat', '=', $input['id'])->first();
+          $penyimpanan->id_lokasi = $input['lokasi'];
+          $penyimpanan->save();
+
+          return redirect('/');
+
+      }      
     }
+
+    public function delete($id) {
+      $alat = Alat::where('alat.id', '=', $id);
+      $alat->delete();
+
+      return redirect('/');
+    }
+
     public function addForm()
     {
-        //$alat = Alat::all();
-
         $lokasi = Lokasi::all();
         return view('alat', ['lokasi' => $lokasi]);
     }
@@ -132,8 +186,8 @@ class AlatController extends Controller
                                 ->whereExists(function($query){
                                     $query->select(DB::raw(1))
                                           ->from('booking')
-                                          ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
-                                          ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                                          //->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                          //->where('selesai', '>=', date('Y-m-d H:i:s', time()))
                                           ->whereRaw('booking.id_alat = alat.id');
                                 })
                                 ->join('booking', 'booking.id_alat', '=', 'alat.id')
@@ -147,11 +201,11 @@ class AlatController extends Controller
                                 ->get();
             return view('dibooking', ['alat' => $available]);
         } else {
-            $available = Alat::whereNotExists(function($query){
+            $available = Alat::whereExists(function($query){
                                     $query->select(DB::raw(1))
                                           ->from('booking')
-                                          ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
-                                          ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
+                                          //->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                          //->where('selesai', '>=', date('Y-m-d H:i:s', time()))
                                           ->whereRaw('booking.id_alat = alat.id');
                                      })
                                     ->join('booking', 'booking.id_alat', '=', 'alat.id')

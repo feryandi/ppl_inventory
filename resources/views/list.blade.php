@@ -29,7 +29,7 @@
         <td>{{$a->kode}}</td>
         <td>{{$a->nama}}</td>
         <td>{{$a->lokasi}}</td>
-        <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
+        <td><a href="{{ url('alat/hapus/'.$a->id) }}"><button class="btn btn-danger">Hapus</button></a></td>
       </tr>
       @endforeach
     </tbody>

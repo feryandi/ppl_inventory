@@ -45,7 +45,7 @@
       <tr>
         <td></td>
         <td></td>
-        <td><a href="{{ url('/alat/edit/' . $alat[0]->id) }}">Edit</a> | <a href="">Hapus</a></td>
+        <td><a href="{{ url('/alat/edit/' . $alat[0]->id) }}">Edit</a> | <a href="{{ url('/alat/hapus/' . $alat[0]->id) }}">Hapus</a></td>
       </tr>
     </table>
     
@@ -62,11 +62,47 @@
         <table class="table table-striped">
           <thead>
             <tr>
+              <th>NIP / NIM</th>
               <th>Pengguna</th>
               <th>Tanggal Peminjaman</th>
               <th>Tanggal Pengembalian</th>
             </tr>
           </thead>
+          <tbody>
+            @foreach ($history_t as $h)
+            <tr>
+              <td>{{ $h->id }}</td>
+              <td>{{ $h->nama }}</td>
+              <td>{{ date('d F Y H:i', strtotime($h->dipinjam)) }}</td>
+              <td>{{ ($h->dikembalikan == '0000-00-00 00:00:00')?"Belum Dikembalikan":date('d F Y H:i', strtotime($h->dikembalikan))  }}</td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="riwayat">
+    <div class="page-header">
+      <h3>Riwayaat Perbaikan Alat</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Tanggal Mulai</th>
+              <th>Tanggal Selesai</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($history_m as $h)
+            <tr>
+              <td>{{ date('d F Y H:i', strtotime($h->mulai)) }}</td>
+              <td>{{ ($h->selesai == '0000-00-00 00:00:00')?"Belum Selesai":date('d F Y H:i', strtotime($h->selesai))  }}</td>
+            </tr>
+            @endforeach
+          </tbody>
         </table>
       </div>
     </div>

@@ -33,7 +33,10 @@
                     <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
                     <td>{{$a->selesai}}</td>
-                    <td><a href="#"><button class="btn btn-danger">Edit</button></a></td>
+                    <td>
+                        <a href="{{ url('dibooking/transfer/'.$a->id) }}"><button class="btn btn-success">Ubah menjadi Peminjaman</button></a>
+                        <a href="{{ url('dibooking/batal/'.$a->id) }}"><button class="btn btn-danger">Batal</button></a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

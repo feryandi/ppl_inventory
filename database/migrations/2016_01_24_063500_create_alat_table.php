@@ -17,6 +17,7 @@ class CreateAlatTable extends Migration
             $table->string('kode', 256);
             $table->string('nama', 256);
             $table->text('deskripsi');
+            $table->timestamp('deleted_at')->nullable();
             //$table->timestamps();
         });
     }

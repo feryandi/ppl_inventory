@@ -48,6 +48,12 @@ class TransaksiController extends Controller
                                 ->where('selesai', '>=', date('Y-m-d H:i:s', time()))
                                 ->count();
 
+            /* Cek apakah barang sedang dipelihara */
+            $check += Pemeliharaan::where('id_alat', $id)
+                                ->where('mulai', '<=', date('Y-m-d H:i:s', time()))
+                                ->where('selesai', '0000-00-00 00:00:00')
+                                ->count();
+
             if ($check == 0) {
                 $transaksi = new Transaksi;
                 $transaksi->id_alat = $id;

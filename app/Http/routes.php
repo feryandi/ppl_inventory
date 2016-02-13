@@ -27,13 +27,16 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/', 'AlatController@getAvailable');
 
 	Route::get('/dibooking', 'AlatController@getDibooking');
-
-	Route::get('/alat/edit/{id}', ['uses' => 'AlatController@edit']);
+	Route::get('/dibooking/batal/{id}', ['uses' => 'BookingController@del']);
+	Route::get('/dibooking/transfer/{id}', ['uses' => 'BookingController@transfer']);
 
 	Route::get('/alat/{id}', ['uses' => 'AlatController@alat']);
+	Route::get('/alat/edit/{id}', ['uses' => 'AlatController@getEdit']);
+	Route::get('/alat/pemeliharaan/{id}', ['uses' => 'PemeliharaanController@add']);
+	Route::get('/alat/hapus/{id}', ['uses' => 'AlatController@delete']);
 	Route::post('/alat/transaksi/{id}', ['uses' => 'TransaksiController@add']);
 	Route::post('/alat/booking/{id}', ['uses' => 'BookingController@add']);
-	Route::get('/alat/pemeliharaan/{id}', ['uses' => 'PemeliharaanController@add']);
+	Route::post('/alat/do_edit', ['uses' => 'AlatController@edit']);
 
 	Route::get('/dipinjam', 'AlatController@getDipinjam');
 	

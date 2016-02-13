@@ -8,6 +8,7 @@ use App\Penyimpanan;
 use App\Peminjam;
 use App\Transaksi;
 use App\Booking;
+use App\Pemeliharaan;
 use Request;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -63,29 +64,38 @@ class BookingController extends Controller
             $check += Booking::where('id_alat', $id)
                                 ->where(function($query) use ($booking_mulai, $booking_selesai)
                                 {
-                                    $query->where('mulai', '>=', $booking_mulai)
-                                          ->where('mulai', '<=', $booking_selesai)
-                                          ->where('selesai', '>=', $booking_selesai);
-                                })
-                                ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
-                                {
-                                    $query->where('mulai', '<=', $booking_mulai)
-                                          ->where('selesai', '>', $booking_mulai)
-                                          ->where('mulai', '<', $booking_selesai)
-                                          ->where('selesai', '>=', $booking_selesai);
-                                })
-                                ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
-                                {
-                                    $query->where('mulai', '<=', $booking_mulai)
-                                          ->where('selesai', '>=', $booking_mulai)
-                                          ->where('selesai', '<=', $booking_selesai);
-                                })
-                                ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
-                                {
-                                    $query->where('mulai', '>=', $booking_mulai)
-                                          ->where('selesai', '<=', $booking_selesai);
+                                    $query->where(function($query) use ($booking_mulai, $booking_selesai)
+                                    {
+                                        $query->where('mulai', '>=', $booking_mulai)
+                                              ->where('mulai', '<=', $booking_selesai)
+                                              ->where('selesai', '>=', $booking_selesai);
+                                    })
+                                    ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
+                                    {
+                                        $query->where('mulai', '<=', $booking_mulai)
+                                              ->where('selesai', '>', $booking_mulai)
+                                              ->where('mulai', '<', $booking_selesai)
+                                              ->where('selesai', '>=', $booking_selesai);
+                                    })
+                                    ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
+                                    {
+                                        $query->where('mulai', '<=', $booking_mulai)
+                                              ->where('selesai', '>=', $booking_mulai)
+                                              ->where('selesai', '<=', $booking_selesai);
+                                    })
+                                    ->orwhere(function($query) use ($booking_mulai, $booking_selesai)
+                                    {
+                                        $query->where('mulai', '>=', $booking_mulai)
+                                              ->where('selesai', '<=', $booking_selesai);
+                                    });
                                 })
                                 ->count();
+
+                /* Cek apakah barang sedang dipelihara */
+                $check += Pemeliharaan::where('id_alat', $id)
+                                    ->where('mulai', '<=', $booking_mulai)
+                                    ->where('selesai', '0000-00-00 00:00:00')
+                                    ->count();
 
             if ($check == 0) {
                 $booking = new Booking;
@@ -101,7 +111,7 @@ class BookingController extends Controller
             } else {
 
                 //return $this->failed(array('message' => "Barang belum dikembalikan"));
-                echo "Barang belum dikembalikan";
+                echo "Barang belum dikembalikan" . $id;
                 return view('welcome');
 
             }
@@ -109,11 +119,23 @@ class BookingController extends Controller
     
     }
 
+    public function transfer($id) {
+        $book = Booking::where('id_alat', $id)->first();
+        $transaksi = new Transaksi;
+        $transaksi->id_alat = $book->id_alat;
+        $transaksi->id_pengguna = $book->id_pengguna;
+        $transaksi->dipinjam = $book->mulai;
+        $transaksi->save();
+
+        $book->delete();   
+
+        return view('welcome');
+    }
+
     public function del($id)
     {
-        Booking::where('id_alat', $id)
-                  ->where('selesai', '0000-00-00 00:00:00')
-                  ->update(['selesai' => date('Y-m-d H:i:s', time())]);
+        $book = Booking::where('id_alat', $id);
+        $book->delete();        
 
         return view('welcome');
     }
