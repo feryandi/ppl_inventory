@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Alat;
 use App\Lokasi;
 use App\Penyimpanan;
+use App\Pemeliharaan;
 use App\Peminjam;
 use App\Transaksi;
 use App\Booking;
