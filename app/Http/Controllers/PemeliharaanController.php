@@ -49,8 +49,6 @@ class PemeliharaanController extends Controller
 
         } else {
 
-            //return $this->failed(array('message' => "Barang belum dikembalikan"));
-            echo "Barang tidak tersedia";
             return view('error');
 
         }

@@ -88,9 +88,7 @@ class AlatController extends Controller
 
       if($validator->fails()) {
 
-          //return $this->failed(array('message' => $validator->messages()));
-          echo "Validation";
-          //return redirect('/');
+          return view('error');
 
       } else {
 
@@ -311,8 +309,6 @@ class AlatController extends Controller
 
         if($validator->fails()) {
 
-            //return $this->failed(array('message' => $validator->messages()));
-            echo "Validation";
             return view('error');
 
         } else {
@@ -326,8 +322,6 @@ class AlatController extends Controller
             $penyimpanan->id_lokasi = $input['lokasi'];
             $penyimpanan->save();
 
-            //return $this->success();
-            //return view('error');
             return redirect('/');
 
         }

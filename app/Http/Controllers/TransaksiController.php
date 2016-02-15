@@ -30,8 +30,6 @@ class TransaksiController extends Controller
 
         if($validator->fails()) {
 
-            //return $this->failed(array('message' => $validator->messages()));
-            echo "Validation";
             return view('error');
 
         } else {
@@ -62,14 +60,10 @@ class TransaksiController extends Controller
                 $transaksi->dipinjam = date('Y-m-d H:i:s', time());
                 $transaksi->save();
 
-                //return $this->success();
-                //return view('error');
                 return redirect('/dipinjam');
 
             } else {
 
-                //return $this->failed(array('message' => "Barang belum dikembalikan"));
-                echo "Barang belum dikembalikan";
                 return view('error');
 
             }
