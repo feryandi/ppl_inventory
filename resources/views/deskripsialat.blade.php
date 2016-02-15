@@ -163,21 +163,13 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Tanggal Peminjaman</label>
                 <div class="col-sm-10 input-date">
-                  D <input type="text" name="mulai_d" id="task-name" class="form-control">
-                  M <input type="text" name="mulai_m" id="task-name" class="form-control">
-                  Y <input type="text" name="mulai_y" id="task-name" class="form-control">
-                  H <input type="text" name="mulai_h" id="task-name" class="form-control">
-                  i <input type="text" name="mulai_i" id="task-name" class="form-control">
+                  <input class="form-control datetimepicker" name="mulai" type="text">
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Tanggal Pengembalian</label>
                 <div class="col-sm-10 input-date">
-                  D <input type="text" name="selesai_d" id="task-name" class="form-control">
-                  M <input type="text" name="selesai_m" id="task-name" class="form-control">
-                  Y <input type="text" name="selesai_y" id="task-name" class="form-control">
-                  H <input type="text" name="selesai_h" id="task-name" class="form-control">
-                  i <input type="text" name="selesai_i" id="task-name" class="form-control">
+                  <input class="form-control datetimepicker" name="selesai" type="text">
                 </div>
             </div>
             <div class="form-group">

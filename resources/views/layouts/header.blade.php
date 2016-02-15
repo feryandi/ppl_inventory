@@ -11,6 +11,9 @@
 
     <!-- Custom styles for this template -->
     <link href="{{ URL::asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/jquery-ui.css')}}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/jquery-ui-timepicker-addon.css')}}" rel="stylesheet">
+    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -58,7 +61,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <script src="{{ URL::asset('assets/js/jquery-1.11.3.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/js/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ URL::asset('assets/jquery-ui.js') }}"></script>
+    <script src="{{ URL::asset('assets/jquery-ui-timepicker-addon.js') }}"></script>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- Main JavaScript -->

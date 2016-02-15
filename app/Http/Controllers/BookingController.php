@@ -28,16 +28,9 @@ class BookingController extends Controller
         $peminjam = Peminjam::select('id')->where('nim/nip', $input['nipnim'])->first();
 
         $rules = array( 'nipnim' => 'required|exists:peminjam,nim/nip',
-                        'mulai_d' => 'required',
-                        'mulai_m' => 'required',
-                        'mulai_y' => 'required',
-                        'mulai_h' => 'required',
-                        'mulai_i' => 'required',
-                        'selesai_d' => 'required',
-                        'selesai_m' => 'required',
-                        'selesai_y' => 'required',
-                        'selesai_h' => 'required',
-                        'selesai_i' => 'required');
+                        'mulai' => 'required',
+                        'selesai' => 'required'
+                    );
         $validator = Validator::make (
             $input,
             $rules
@@ -50,8 +43,8 @@ class BookingController extends Controller
             return view('error');
 
         } else {
-            $booking_mulai = date('Y-m-d H:i:s', mktime($input['mulai_h'], $input['mulai_i'], 0, $input['mulai_m'], $input['mulai_d'], $input['mulai_y']));
-            $booking_selesai = date('Y-m-d H:i:s', mktime($input['selesai_h'], $input['selesai_i'], 0, $input['selesai_m'], $input['selesai_d'], $input['selesai_y']));
+            $booking_mulai = date('Y-m-d H:i:s', strtotime($input['mulai']));
+            $booking_selesai = date('Y-m-d H:i:s', strtotime($input['selesai']));
 
             $check = 0;
 
