@@ -333,6 +333,10 @@ class AlatController extends Controller
         }
     }
 
+    public function statistik() {
+      return view('statistik');
+    }
+
     public function statistik_frekuensi() {
         $input = Request::all();
         $peminjaman = NULL;

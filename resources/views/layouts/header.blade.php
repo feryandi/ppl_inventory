@@ -48,7 +48,7 @@
             <li class="{{ Request::is('dipelihara') ? 'active' : '' }}"><a href="{{ url('dipelihara') }}">Alat Dipelihara</a></li>
             <li class="{{ Request::is('tambah') ? 'active' : '' }}"><a href="{{ url('tambah') }}">Tambah Alat</a></li>
             <li class="{{ Request::is('lokasi') ? 'active' : '' }}"><a href="{{ url('lokasi') }}">Lokasi</a></li>
-            <li class=""><a href="#">Statistik</a></li>
+            <li class="{{ Request::is('statistik') ? 'active' : '' }}"><a href="{{ url('statistik') }}">Statistik</a></li>
           </ul>
         </div>
         
@@ -63,8 +63,11 @@
     <script src="{{ URL::asset('assets/js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ URL::asset('assets/jquery-ui.js') }}"></script>
     <script src="{{ URL::asset('assets/jquery-ui-timepicker-addon.js') }}"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- Main JavaScript -->
     <script src="{{ URL::asset('assets/js/main.js') }}"></script>
+
+    @yield('script')
 </html>

@@ -71,6 +71,7 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::post('/pemeliharaan/add', 'PemeliharaanController@add');
 
+	Route::get('/statistik', 'AlatController@statistik');
 	Route::get('/statistik/frekuensi/', 'AlatController@statistik_frekuensi');
 
 });
