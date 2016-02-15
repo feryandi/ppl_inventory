@@ -337,22 +337,29 @@ class AlatController extends Controller
         $input = Request::all();
         $peminjaman = NULL;
 
-        echo $input['type'];
+        echo $input['type']."<br>";
 
         if($input["type"] == "all") {
-            
-            $peminjaman = Transaksi::all();
+            // statistik penggunaan semua barang
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                                    ->select(DB::raw('count(*) as frekuensi, alat.nama'))
+                                    ->groupBy('alat.nama')
+                                    ->get();
 
         } else if(is_numeric($input["type"])) {
-
-
+            // statistik penggunaan per item
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                                    ->where('alat.id', '=', $input['type'])
+                                    ->select(DB::raw('count(*) as frekuensi, alat.id'))
+                                    ->groupBy('alat.id')
+                                    ->get();
 
         } else {
-
-            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.kode')
+            // statistik penggunaan per kategori
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
                                     ->where('alat.nama', '=', $input['type'])
-                                    ->select(DB::raw('count(*) as frekuensi, alat.kode'))
-                                    ->groupBy('alat.kode')
+                                    ->select(DB::raw('count(*) as frekuensi, alat.id'))
+                                    ->groupBy('alat.id')
                                     ->get();
 
         }

@@ -1,0 +1,17 @@
+frekuensi penggunaan alat (y : frekuensi pemakaian, eks : kategori/waktu)
+  - keseluruhan / per kategori / ID
+  - dalam jangka waktu
+  
+frekuensi kerusakan alat (y : frekuensi pemakaian, eks : kategori/waktu)
+  - keseluruhan / per kategori / ID
+  - dalam jangka waktu
+
+frekuensi penggunaan alat oleh user
+  - keseluruhan / per kategori / ID
+  - dalam jangka waktu
+
+pilihan jangka waktu : seminggu, sebulan, semester, setahun lalu
+  tanggal tertentu, bulan tertentu, semester tertentu, tahun ajaran tertentu, tahun tertentu
+  
+yang ada pada halaman alat : 
+histori peminjaman
