@@ -73,5 +73,6 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/statistik', 'AlatController@statistik');
 	Route::get('/statistik/frekuensi/', 'AlatController@statistik_frekuensi');
-
+	Route::get('/statistik/kerusakan/', 'AlatController@statistik_kerusakan');
+	Route::get('/statistik/user/', 'AlatController@statistik_user');
 });
