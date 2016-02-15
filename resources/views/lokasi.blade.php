@@ -13,7 +13,7 @@
         <div class="form-group">
             <label for="task-name" class="col-sm-2 control-label">Input Lokasi</label>
             <div class="col-sm-10">
-                <input type="text"  name="nama" class="form-control" id="task-name" placeholder="Kode alat">
+                <input type="text"  name="nama" class="form-control" id="task-name" placeholder="Nama Lokasi">
             </div>
         </div>
 
