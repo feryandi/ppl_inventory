@@ -73,6 +73,8 @@ Route::group(['middleware' => ['web']], function () {
 
 	Route::get('/statistik', 'AlatController@statistik');
 	Route::get('/statistik/frekuensi/', 'AlatController@statistik_frekuensi');
-	Route::get('/statistik/kerusakan/', 'AlatController@statistik_kerusakan');
-	Route::get('/statistik/user/', 'AlatController@statistik_user');
+	Route::get('/statistik/kerusakan/', 'AlatController@statistik_kerusakan_all');
+	Route::get('/statistik/user/select', 'AlatController@statistik_user_intro');
+	Route::post('/statistik/user/redirect', 'AlatController@statistik_user_redirector');
+	Route::get('/statistik/user/{id}', ['uses' => 'AlatController@statistik_user_all']);
 });

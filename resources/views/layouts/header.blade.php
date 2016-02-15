@@ -63,7 +63,7 @@
     <script src="{{ URL::asset('assets/js/jquery-1.11.3.min.js') }}"></script>
     <script src="{{ URL::asset('assets/jquery-ui.js') }}"></script>
     <script src="{{ URL::asset('assets/jquery-ui-timepicker-addon.js') }}"></script>
-    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="{{ URL::asset('assets/js/highcharts.js') }}"></script>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
     <!-- Main JavaScript -->

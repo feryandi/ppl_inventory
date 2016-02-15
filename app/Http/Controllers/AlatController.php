@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Alat;
+use App\Peminjam;
 use App\Lokasi;
 use App\Penyimpanan;
 use App\Transaksi;
@@ -334,6 +335,43 @@ class AlatController extends Controller
                               ->get();
 
       return view('statistik', ['statistik_all' => $peminjaman]);
+    }
+
+    public function statistik_kerusakan_all() {
+      $peminjaman = Pemeliharaan::join('alat', 'pemeliharaan.id_alat', '=', 'alat.id')
+                              ->select(DB::raw('count(*) as y, alat.nama as name'))
+                              ->groupBy('alat.nama')
+                              ->get();
+
+      return view('statistik_kerusakan', ['statistik_all' => $peminjaman]);
+    }
+
+    public function statistik_user_intro() {
+      return view('statistik_select_user');
+    }
+
+    public function statistik_user_redirector() {
+      $input = Request::all();
+      $peminjaman = NULL;
+
+      $peminjam = Peminjam::where('nim/nip', '=', $input['nim/nip'])
+                          ->select('id')
+                          ->first();
+      return redirect('/statistik/user/' . $peminjam['id']);
+    }
+
+    public function statistik_user_all($id) {
+      $peminjam = Peminjam::where('id', '=', $id)
+                          ->select('nama', 'nim/nip')
+                          ->first();
+
+      $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                              ->where('transaksi.id_pengguna', '=', $id)
+                              ->select(DB::raw('count(*) as y, alat.nama as name'))
+                              ->groupBy('alat.nama')
+                              ->get();
+
+      return view('statistik_user', ['statistik_all' => $peminjaman, 'peminjam' => $peminjam]);
     }
 
     public function statistik_frekuensi() {

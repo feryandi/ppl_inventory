@@ -3,13 +3,13 @@
 
 @section('content')
 	<ul class="nav nav-tabs">
-	  <li role="presentation" class="active"><a href="{{ url('statistik') }}">Statistik Alat</a></li>
-	  <li role="presentation"><a href="{{ url('statistik/kerusakan') }}">Statistik Kerusakan</a></li>
+	  <li role="presentation"><a href="{{ url('statistik') }}">Statistik Alat</a></li>
+	  <li role="presentation" class="active"><a href="{{ url('statistik/kerusakan') }}">Statistik Kerusakan</a></li>
 	  <li role="presentation"><a href="{{ url('statistik/user/select') }}">Statistik Pengguna</a></li>
 	</ul>
 
 	<div class="page-header">
-	    <h1>Statistik Alat</h1>
+	    <h1>Statistik Kerusakan</h1>
 	</div>
 
 	<div id="pie-chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
@@ -25,7 +25,7 @@
 	        type: 'pie'
 	    },
 	    title: {
-	        text: 'Statistik peminjaman alat secara keseluruhan'
+	        text: 'Statistik kerusakan alat secara keseluruhan'
 	    },
 	    tooltip: {
 	        pointFormat: '<b>{point.percentage:.1f}%</b>'
