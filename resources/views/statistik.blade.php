@@ -7,7 +7,6 @@
 	</div>
 
 	<div id="pie-chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-{{ ($statistik_all) }}
 @endsection
 
 @section('script')
@@ -42,7 +41,7 @@
 	    series: [{
 	        name: '',
 	        colorByPoint: true,
-	        data: []
+	        data: <?php echo $statistik_all; ?>
 	    }]
 	});
 	</script>
