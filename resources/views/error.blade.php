@@ -38,7 +38,8 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">IF3250</div>
+                <div class="title">Input Salah</div>
+                <p><a href="{{ url('/') }}">Kembali ke halaman utama</a></p>
             </div>
         </div>
     </body>

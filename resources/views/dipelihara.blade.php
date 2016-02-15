@@ -25,11 +25,11 @@
             <tbody>
             @foreach ($alat as $a)
                 <tr>
-                    <td><a href="{{ url('alat/'.$a->id) }}">{{$a->id}}</a></td>
+                    <td>{{$a->id}}</td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
                     <td>{{$a->mulai}}</td>
-                    <td><a href="{{ url('pemeliharaan/selesai/'.$a->id) }}"><button class="btn btn-success">Pemeliharaan Selesai</button></a></td>
+                    <td><a href="{{ url('pemeliharaan/selesai/'.$a->id) }}"><button class="btn btn-success">Selesai</button></a></td>
                 </tr>
             @endforeach
             </tbody>

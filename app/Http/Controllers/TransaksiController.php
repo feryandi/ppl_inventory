@@ -32,7 +32,7 @@ class TransaksiController extends Controller
 
             //return $this->failed(array('message' => $validator->messages()));
             echo "Validation";
-            return view('welcome');
+            return view('error');
 
         } else {
             $check = 0;
@@ -63,13 +63,14 @@ class TransaksiController extends Controller
                 $transaksi->save();
 
                 //return $this->success();
-                return view('welcome');
+                //return view('error');
+                return redirect('/dipinjam');
 
             } else {
 
                 //return $this->failed(array('message' => "Barang belum dikembalikan"));
                 echo "Barang belum dikembalikan";
-                return view('welcome');
+                return view('error');
 
             }
         }
@@ -82,6 +83,6 @@ class TransaksiController extends Controller
                   ->where('dikembalikan', '0000-00-00 00:00:00')
                   ->update(['dikembalikan' => date('Y-m-d H:i:s', time())]);
 
-        return view('welcome');
+        return redirect('/dipinjam');
     }
 }

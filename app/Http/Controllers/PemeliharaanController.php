@@ -45,13 +45,13 @@ class PemeliharaanController extends Controller
             $pemeliharaan->save();
 
             //return $this->success();
-            return view('welcome');
+            return redirect('/dipelihara');
 
         } else {
 
             //return $this->failed(array('message' => "Barang belum dikembalikan"));
             echo "Barang tidak tersedia";
-            return view('welcome');
+            return view('error');
 
         }
     
@@ -63,6 +63,6 @@ class PemeliharaanController extends Controller
                   ->where('selesai', '0000-00-00 00:00:00')
                   ->update(['selesai' => date('Y-m-d H:i:s', time())]);
 
-        return view('welcome');
+        return redirect('/dipelihara');
     }
 }

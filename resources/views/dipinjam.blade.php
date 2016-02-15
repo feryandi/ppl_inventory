@@ -26,12 +26,12 @@
             <tbody>
             @foreach ($alat as $a)
                 <tr>
-                    <td><a href="{{ url('alat/'.$a->id) }}">{{$a->id}}</a></td>
+                    <td>{{$a->id}}</td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
                     <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
-                    <td><a href="{{ url('transaksi/selesai/'.$a->id) }}"><button class="btn btn-success">Transaksi Selesai</button></a></td>
+                    <td><a href="{{ url('transaksi/selesai/'.$a->id) }}"><button class="btn btn-success">Selesai</button></a></td>
                 </tr>
             @endforeach
             </tbody>
