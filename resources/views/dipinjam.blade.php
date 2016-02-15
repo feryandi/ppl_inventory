@@ -31,7 +31,7 @@
                     <td>{{$a->nama}}</td>
                     <td>{{$a->peminjam}}</td>
                     <td>{{$a->mulai}}</td>
-                    <td><a href="{{ url('transaksi/selesai/'.$a->id) }}"><button class="btn btn-success">Transaksi Selesai</button></a></td>
+                    <td><a href="{{ url('transaksi/selesai/'.$a->id) }}"><button class="btn btn-success">Selesai</button></a></td>
                 </tr>
             @endforeach
             </tbody>

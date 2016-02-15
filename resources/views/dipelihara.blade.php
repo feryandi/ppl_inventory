@@ -29,7 +29,7 @@
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
                     <td>{{$a->mulai}}</td>
-                    <td><a href="{{ url('pemeliharaan/selesai/'.$a->id) }}"><button class="btn btn-success">Pemeliharaan Selesai</button></a></td>
+                    <td><a href="{{ url('pemeliharaan/selesai/'.$a->id) }}"><button class="btn btn-success">Selesai</button></a></td>
                 </tr>
             @endforeach
             </tbody>
