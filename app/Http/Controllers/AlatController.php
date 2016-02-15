@@ -364,14 +364,71 @@ class AlatController extends Controller
                                     ->get();
 
         }
-        echo $peminjaman;
+        return view('statistik', ['statistik_all' => $peminjaman]);
     }
 
     public function statistik_kerusakan() {
-        
+        $input = Request::all();
+        $peminjaman = NULL;
+
+        if($input["type"] == "all") {
+            // statistik penggunaan semua barang
+            $peminjaman = Pemeliharaan::join('alat', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                    ->select(DB::raw('count(*) as y, alat.nama as name'))
+                                    ->groupBy('alat.nama')
+                                    ->get();
+
+        } else if(is_numeric($input["type"])) {
+            // statistik penggunaan per item
+            $peminjaman = Pemeliharaan::join('alat', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                    ->where('alat.id', '=', $input['type'])
+                                    ->select(DB::raw('count(*) as y, alat.id as name'))
+                                    ->groupBy('alat.id')
+                                    ->get();
+
+        } else {
+            // statistik penggunaan per kategori
+            $peminjaman = Pemeliharaan::join('alat', 'pemeliharaan.id_alat', '=', 'alat.id')
+                                    ->where('alat.nama', '=', $input['type'])
+                                    ->select(DB::raw('count(*) as y, alat.id as name'))
+                                    ->groupBy('alat.id')
+                                    ->get();
+
+        }
+        return view('statistik', ['statistik_all' => $peminjaman]);
     }
 
     public function statistik_user() {
-        
+        $input = Request::all();
+        $peminjaman = NULL;
+
+        if($input["type"] == "all") {
+            // statistik penggunaan semua barang
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                                    ->where('transaksi.id_pengguna', '=', $input['id'])
+                                    ->select(DB::raw('count(*) as y, alat.nama as name'))
+                                    ->groupBy('alat.nama')
+                                    ->get();
+
+        } else if(is_numeric($input["type"])) {
+            // statistik penggunaan per item
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                                    ->where('transaksi.id_pengguna', '=', $input['id'])
+                                    ->where('alat.id', '=', $input['type'])
+                                    ->select(DB::raw('count(*) as y, alat.id as name'))
+                                    ->groupBy('alat.id')
+                                    ->get();
+
+        } else {
+            // statistik penggunaan per kategori
+            $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                                    ->where('transaksi.id_pengguna', '=', $input['id'])
+                                    ->where('alat.nama', '=', $input['type'])
+                                    ->select(DB::raw('count(*) as y, alat.id as name'))
+                                    ->groupBy('alat.id')
+                                    ->get();
+
+        }
+        return view('statistik', ['statistik_all' => $peminjaman]);
     }
 }
