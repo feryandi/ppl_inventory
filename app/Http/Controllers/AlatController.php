@@ -313,7 +313,7 @@ class AlatController extends Controller
 
             //return $this->failed(array('message' => $validator->messages()));
             echo "Validation";
-            return view('welcome');
+            return view('error');
 
         } else {
 
@@ -327,7 +327,7 @@ class AlatController extends Controller
             $penyimpanan->save();
 
             //return $this->success();
-            //return view('welcome');
+            //return view('error');
             return redirect('/');
 
         }

@@ -47,7 +47,7 @@ class BookingController extends Controller
 
             //return $this->failed(array('message' => $validator->messages()));
             echo "Validation";
-            return view('welcome');
+            return view('error');
 
         } else {
             $booking_mulai = date('Y-m-d H:i:s', mktime($input['mulai_h'], $input['mulai_i'], 0, $input['mulai_m'], $input['mulai_d'], $input['mulai_y']));
@@ -106,13 +106,13 @@ class BookingController extends Controller
                 $booking->save();
 
                 //return $this->success();
-                return view('welcome');
+                return redirect('/dibooking');
 
             } else {
 
                 //return $this->failed(array('message' => "Barang belum dikembalikan"));
                 echo "Barang belum dikembalikan" . $id;
-                return view('welcome');
+                return view('error');
 
             }
         }
@@ -129,14 +129,14 @@ class BookingController extends Controller
 
         $book->delete();   
 
-        return view('welcome');
+        return redirect('/dipinjam');
     }
 
     public function del($id)
     {
         $book = Booking::where('id_alat', $id);
-        $book->delete();        
+        $book->delete();
 
-        return view('welcome');
+        return redirect('/dibooking');
     }
 }

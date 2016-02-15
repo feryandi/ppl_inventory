@@ -93,7 +93,7 @@ class LokasiController extends Controller
 
             //return $this->failed(array('message' => $validator->messages()));
             echo "Validation";
-            return view('welcome');
+            return view('error');
 
         } else {
 
@@ -102,8 +102,8 @@ class LokasiController extends Controller
             $lokasi->save();
 
             //return $this->success();
-            //return view('welcome');
-            return redirect('/');
+            //return view('error');
+            return redirect('/lokasi');
         }
     }
 }
