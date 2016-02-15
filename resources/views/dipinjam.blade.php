@@ -26,7 +26,7 @@
             <tbody>
             @foreach ($alat as $a)
                 <tr>
-                    <td><a href="{{ url('alat/'.$a->id) }}">{{$a->id}}</a></td>
+                    <td>{{$a->id}}</td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
                     <td>{{$a->peminjam}}</td>
