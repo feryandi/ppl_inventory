@@ -334,19 +334,22 @@ class AlatController extends Controller
     }
 
     public function statistik() {
-      return view('statistik');
+      $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
+                              ->select(DB::raw('count(*) as y, alat.nama as name'))
+                              ->groupBy('alat.nama')
+                              ->get();
+
+      return view('statistik', ['statistik_all' => $peminjaman]);
     }
 
     public function statistik_frekuensi() {
         $input = Request::all();
         $peminjaman = NULL;
 
-        echo $input['type']."<br>";
-
         if($input["type"] == "all") {
             // statistik penggunaan semua barang
             $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
-                                    ->select(DB::raw('count(*) as frekuensi, alat.nama'))
+                                    ->select(DB::raw('count(*) as y, alat.nama as name'))
                                     ->groupBy('alat.nama')
                                     ->get();
 
@@ -354,7 +357,7 @@ class AlatController extends Controller
             // statistik penggunaan per item
             $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
                                     ->where('alat.id', '=', $input['type'])
-                                    ->select(DB::raw('count(*) as frekuensi, alat.id'))
+                                    ->select(DB::raw('count(*) as y, alat.id as name'))
                                     ->groupBy('alat.id')
                                     ->get();
 
@@ -362,7 +365,7 @@ class AlatController extends Controller
             // statistik penggunaan per kategori
             $peminjaman = Transaksi::join('alat', 'transaksi.id_alat', '=', 'alat.id')
                                     ->where('alat.nama', '=', $input['type'])
-                                    ->select(DB::raw('count(*) as frekuensi, alat.id'))
+                                    ->select(DB::raw('count(*) as y, alat.id as name'))
                                     ->groupBy('alat.id')
                                     ->get();
 

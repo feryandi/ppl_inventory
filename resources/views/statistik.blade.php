@@ -7,6 +7,7 @@
 	</div>
 
 	<div id="pie-chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+{{ ($statistik_all) }}
 @endsection
 
 @section('script')
@@ -41,25 +42,7 @@
 	    series: [{
 	        name: '',
 	        colorByPoint: true,
-	        data: [{
-	            name: 'Kentang',
-	            y: 100,
-	        }, {
-	            name: 'Wortel',
-	            y: 24.03,
-	        }, {
-	            name: 'Tomat',
-	            y: 10.38
-	        }, {
-	            name: 'Brokoli',
-	            y: 4.77
-	        }, {
-	            name: 'Alpukat',
-	            y: 0.91
-	        }, {
-	            name: 'Mangga',
-	            y: 0.2
-	        }]
+	        data: []
 	    }]
 	});
 	</script>
