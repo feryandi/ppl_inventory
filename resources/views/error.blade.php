@@ -39,7 +39,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Input Salah</div>
-                <p><a href="{{ url('/') }}">Kembali ke halaman utama</a></p>
+                <p><a href="{{ url('/') }}">Kembali</a></p>
             </div>
         </div>
     </body>
