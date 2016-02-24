@@ -15,7 +15,6 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
                 <th>Kode Barang</th>
                 <th>Nama Barang</th>
                 <th>Peminjam</th>
@@ -27,7 +26,6 @@
             <tbody>
             @foreach ($alat as $a)
                 <tr>
-                    <td><a href="{{ url('alat/'.$a->id) }}">{{$a->id}}</a></td>
                     <td>{{$a->kode}}</td>
                     <td>{{$a->nama}}</td>
                     <td>{{$a->peminjam}}</td>

@@ -15,7 +15,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Kode Barang</th>
         <th>Nama Barang</th>
         <th>Lokasi</th>
@@ -25,7 +24,6 @@
     <tbody>
       @foreach ($alat as $a)
       <tr>
-        <td>{{$a->id}}</td>
         <td>{{$a->kode}}</td>
         <td>{{$a->nama}}</td>
         <td>{{$a->lokasi}}</td>
